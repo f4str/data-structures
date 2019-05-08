@@ -27,13 +27,21 @@ public class ArrayList<E> {
 	}
 	
 	public void add(E e) {
-		ensureCapacity();
-		data[size++] = e;
+		if (size == data.length) {
+			E[] temp = (E[])(new Object[size * 2]);
+			System.arraycopy(data, 0, temp, 0, size);
+			data = temp;
+		}
+		data[size] = e;
+		size++;
 	}
 	
-	public void add(int index, E e){
-		index = checkIndex(index);
-		ensureCapacity();
+	public void add(int index, E e) {
+		if (size == data.length) {
+			E[] temp = (E[])(new Object[size * 2]);
+			System.arraycopy(data, 0, temp, 0, size);
+			data = temp;
+		}
 		
 		for (int i = size - 1; i >= index; i--) {
 			data[i + 1] = data[i];
@@ -43,7 +51,6 @@ public class ArrayList<E> {
 	}
 	
 	public E get(int index) {
-		checkIndex(index);
 		return data[index];
 	}
 	
@@ -71,14 +78,12 @@ public class ArrayList<E> {
 	}
 	
 	public E set(int index, E e) {
-		checkIndex(index);
 		E temp = data[index];
 		data[index] = e;
 		return temp;
 	}
 	
 	public E remove(int index) {
-		checkIndex(index);
 		E elem = data[index];
 		size--;
 		for (int i = index; i < size; i++) {
@@ -102,20 +107,6 @@ public class ArrayList<E> {
 			E[] temp = (E[])(new Object[size]);
 			System.arraycopy(data, 0, temp, 0, size);
 			data = temp;
-		}
-	}
-	
-	private void ensureCapacity() {
-		if (size == data.length) {
-			E[] temp = (E[])(new Object[size * 2]);
-			System.arraycopy(data, 0, temp, 0, size);
-			data = temp;
-		}
-	}
-	
-	private void checkIndex(int index) {
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 		}
 	}
 	

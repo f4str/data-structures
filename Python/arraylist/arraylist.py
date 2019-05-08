@@ -1,39 +1,73 @@
 class ArrayList:
 	def __init__(self):
-		self.data = []
+		self._capacity = 16
+		self._data = [None] * self._capacity
+		self._size = 0
 	
 	def __len__(self):
-		return len(data)
+		return self._size
 	
 	def __getitem__(self, key):
-		return self.data[key]
+		return self._data[key]
 	
 	def __contains__(self, key):
-		return key in self.data
+		return key in self._data
+	
+	@property
+	def capacity(self):
+		return self._capacity
 	
 	def add(self, e):
-		self.data.append(e)
+		if self._capacity == self._size:
+			self._capacity *= 2
+			temp = [None] * self._capacity
+			for i in range(self._size):
+				temp[i] = self._data[i]
+			self._data = temp
+		self._data[self._size] = e
+		self._size += 1
 	
 	def insert(self, index, e):
-		self.data.insert(index, e)
+		if self._capacity == self._size:
+			self._capacity *= 2
+			temp = [None] * self._capacity
+			for i in range(self._size):
+				temp[i] = self._data[i]
+			self._data = temp
+		self._size += 1
+		i = self._size
+		while i >= index:
+			self._data[i] = self._data[i - 1]
+		self._data[index] = e
 	
 	def clear(self):
-		self.data.clear()
+		self._capacity = 16
+		self._data = [None] * self._capacity
+		self._size = 0
 	
 	def index(self, e):
-		for i in len(self.data):
-			if self.data[i] == e:
+		for i in len(self._data):
+			if self._data[i] == e:
 				return i
 		return -1
 	
 	def remove(self, e):
-		if e in self.data:
-			self.data.remove(e)
+		i = self.index(e)
+		if i >= 0:
+			self.pop(i)
 			return True
 		return False
 	
-	def remove_at(self, index):
+	def pop(self, index=None):
+		if index is None:
+			self._size -= 1
+			return self._data[self._size]
 		temp = self.data[index]
-		self.data.remove(temp)
+		self._size -= 1
+		for i in range(index, self._size):
+			self._data[i] = self._data[i + 1]
 		return temp
+	
+	def __str__(self):
+		return ''.join(self._data)
 	
