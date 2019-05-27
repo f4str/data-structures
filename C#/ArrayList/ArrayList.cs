@@ -35,6 +35,18 @@ namespace ArrayList
 			return Count == 0;
 		}
 		
+		public T Get(int index)
+		{
+			return _data[i];
+		}
+		
+		public T Set(T e, int index) 
+		{
+			T temp = _data[index];
+			_data[index] = e;
+			return temp;
+		}
+		
 		public void Add(T e) 
 		{
 			if (Count == _data.Length) 
@@ -125,18 +137,6 @@ namespace ArrayList
 				Array.Copy(_data, 0, temp, 0, Count);
 				_data = temp;
 			}
-		}
-		
-		public override string ToString() 
-		{
-			StringBuilder sb = new StringBuilder("[");
-			foreach (T e in _data) 
-			{
-				sb.Append(e);
-				sb.Append(", ");
-			}
-			sb.Replace(sb.Length - 1, sb.Length, "]");
-			return sb.ToString();
 		}
 	}
 }

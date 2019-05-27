@@ -24,6 +24,14 @@ int array_list_capacity(const array_list* list) {
 	return list->capacity;
 }
 
+void* array_list_get(const array_list* list, int index) {
+	return list->data[index];
+}
+
+void array_list_set(array_list* list, const void* e, int index) {
+	list->data[index] = e;
+}
+
 void array_list_add(array_list* list, void* e) {
 	if (list->size == list->capacity) {
 		realloc(list->data, list->capacity * 2);
@@ -34,7 +42,7 @@ void array_list_add(array_list* list, void* e) {
 	list->size++;
 }
 
-void array_list_insert(array_list* list, void* e, int index) {
+void array_list_insert(array_list* list, const void* e, int index) {
 	if (list->size == list->capacity) {
 		realloc(list->data, list->capacity * 2);
 		list->capacity *= 2;
@@ -56,14 +64,6 @@ void* array_list_remove(array_list* list, int index) {
 		list->data[i] = list->data[i + 1];
 	}
 	return temp;
-}
-
-void* array_list_get(const array_list* list, int index) {
-	return list->data[index];
-}
-
-void array_list_set(array_list* list, int index, void* e) {
-	list->data[index] = e;
 }
 
 void array_list_clear(array_list* list) {

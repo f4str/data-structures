@@ -26,6 +26,16 @@ public class ArrayList<E> {
 		return data.length;
 	}
 	
+	public E get(int index) {
+		return data[index];
+	}
+	
+	public E set(int index, E e) {
+		E temp = data[index];
+		data[index] = e;
+		return temp;
+	}
+	
 	public void add(E e) {
 		if (size == data.length) {
 			E[] temp = (E[])(new Object[size * 2]);
@@ -50,10 +60,6 @@ public class ArrayList<E> {
 		size++;
 	}
 	
-	public E get(int index) {
-		return data[index];
-	}
-	
 	public boolean contains(E e) {
 		for (E elem : data) {
 			if (e.equals(elem)) {
@@ -75,12 +81,6 @@ public class ArrayList<E> {
 			}
 		}
 		return -1;
-	}
-	
-	public E set(int index, E e) {
-		E temp = data[index];
-		data[index] = e;
-		return temp;
 	}
 	
 	public E remove(int index) {
@@ -108,16 +108,5 @@ public class ArrayList<E> {
 			System.arraycopy(data, 0, temp, 0, size);
 			data = temp;
 		}
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder("[");
-		for (E e : data) {
-			sb.append(e);
-			sb.append(", ");
-		}
-		sb.replace(sb.length() - 1, sb.length(), "]");
-		return sb.toString();
 	}
 }

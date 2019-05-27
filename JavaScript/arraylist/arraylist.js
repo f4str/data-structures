@@ -73,7 +73,7 @@ class ArrayList {
 		return false;
 	}
 	
-	pop(index=null) {
+	pop(index = null) {
 		if (index == null) {
 			self._length--;
 			return self._data[self._length];
@@ -90,9 +90,5 @@ class ArrayList {
 		this._data = new Array(INITIAL_CAPACITY);
 		this._length = 0;
 		this._capacity = INITIAL_CAPACITY;
-	}
-	
-	toString() {
-		return this._data.toString()
 	}
 }

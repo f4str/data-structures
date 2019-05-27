@@ -17,6 +17,14 @@ class ArrayList:
 	def capacity(self):
 		return self._capacity
 	
+	def get(self, index):
+		return self._data[index]
+	
+	def set(self, index, e):
+		temp = self._data[index]
+		self._data[index] = e
+		return temp
+	
 	def add(self, e):
 		if self._capacity == self._size:
 			self._capacity *= 2
@@ -58,7 +66,7 @@ class ArrayList:
 			return True
 		return False
 	
-	def pop(self, index=None):
+	def pop(self, index = None):
 		if index is None:
 			self._size -= 1
 			return self._data[self._size]
@@ -67,7 +75,4 @@ class ArrayList:
 		for i in range(index, self._size):
 			self._data[i] = self._data[i + 1]
 		return temp
-	
-	def __str__(self):
-		return ''.join(self._data)
 	
