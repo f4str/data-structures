@@ -15,6 +15,10 @@ class ArrayList {
 		return this._capacity;
 	}
 	
+	empty() {
+		return this._length == 0;
+	}
+	
 	get(index) {
 		return this._data[index];
 	}
@@ -55,6 +59,15 @@ class ArrayList {
 		this._length++;
 	}
 	
+	contains(e) {
+		for (let i = 0; i < this._length; i++) {
+			if (this._data[i] == e) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	indexOf(e) {
 		for (let i = 0; i < this._length; i++) {
 			if (this._data[i] == e) {
@@ -62,15 +75,6 @@ class ArrayList {
 			}
 		}
 		return -1;
-	}
-	
-	remove(e) {
-		let i = self.indexOf(e)
-		if (i >= 0) {
-			self.pop(i);
-			return true;
-		}
-		return false;
 	}
 	
 	pop(index = null) {
@@ -84,6 +88,15 @@ class ArrayList {
 			self._data[i] = self._data[i + 1];
 		}
 		return temp
+	}
+	
+	remove(e) {
+		let i = self.indexOf(e)
+		if (i >= 0) {
+			self.pop(i);
+			return true;
+		}
+		return false;
 	}
 	
 	clear() {

@@ -4,22 +4,25 @@
 template <typename T>
 class ArrayList {
 	private:
-		T* data;
-		int size;
-		int capacity;
+		T* data_;
+		int size_;
+		int capacity_;
 	public:
-		ArrayList() : data(new T[10]), size(0), capacity(10);
+		static const int INITAL_CAPACITY = 16;
+		
+		ArrayList() : data_(new T[INITAL_CAPACITY]), size_(0), capacity_(INITAL_CAPACITY) {};
+		ArrayList(T arr[], int length);
 		ArrayList(const ArrayList& list);
 		~ArrayList();
 		int size();
 		int capacity();
 		bool empty();
 		T& get(int index);
-		void set(T& e, int index);
+		void set(int index, T& e);
 		void add(T& e);
-		void insert(T& e, int index);
-		bool remove(T& e);
-		void erase(int index); 
+		void insert(int index, T& e);
+		T& remove(int index);
+		void clear();
 		T& operator[](int index);
 };
 

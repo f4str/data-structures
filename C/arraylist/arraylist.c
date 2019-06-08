@@ -4,10 +4,10 @@
 
 array_list* array_list_new() {
 	array_list* list = NULL;
-	list = (array_list*)malloc(sizeof(array_list) * sizeof(void*));
-	list->data = malloc(INITIAL_CAPACITY);
+	list = (array_list*)malloc(sizeof(array_list));
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
+	list->data = malloc(INITIAL_CAPACITY * sizeof(void*));
 	return list;
 }
 
@@ -28,27 +28,27 @@ void* array_list_get(const array_list* list, int index) {
 	return list->data[index];
 }
 
-void array_list_set(array_list* list, const void* e, int index) {
+void array_list_set(array_list* list, void* e, int index) {
 	list->data[index] = e;
 }
 
 void array_list_add(array_list* list, void* e) {
 	if (list->size == list->capacity) {
-		realloc(list->data, list->capacity * 2);
+		list->data = realloc(list->data, list->capacity * 2);
 		list->capacity *= 2;
 	}
 	
 	list->data[list->size] = e;
-	list->size++;
+	++(list->size);
 }
 
-void array_list_insert(array_list* list, const void* e, int index) {
+void array_list_insert(array_list* list, void* e, int index) {
 	if (list->size == list->capacity) {
-		realloc(list->data, list->capacity * 2);
+		list->data = realloc(list->data, list->capacity * 2);
 		list->capacity *= 2;
 	}
 	
-	list->size++;
+	++(list->size);
 	int i;
 	for (i = list->size; i >= index; --i) {
 		list->data[i] = list->data[i - 1];
@@ -59,7 +59,7 @@ void array_list_insert(array_list* list, const void* e, int index) {
 void* array_list_remove(array_list* list, int index) {
 	void* temp = list->data[index];
 	int i;
-	list->size--;
+	--(list->size);
 	for (i = index; i < list->size; ++i) {
 		list->data[i] = list->data[i + 1];
 	}
@@ -68,7 +68,7 @@ void* array_list_remove(array_list* list, int index) {
 
 void array_list_clear(array_list* list) {
 	free(list->data);
-	list->data = malloc(INITIAL_CAPACITY);
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
+	list->data = malloc(INITIAL_CAPACITY * sizeof(void*));
 }

@@ -1,6 +1,8 @@
 class ArrayList:
+	INITIAL_CAPACITY = 16
+	
 	def __init__(self):
-		self._capacity = 16
+		self._capacity = INITIAL_CAPACITY
 		self._data = [None] * self._capacity
 		self._size = 0
 	
@@ -10,12 +12,21 @@ class ArrayList:
 	def __getitem__(self, key):
 		return self._data[key]
 	
+	def __setitem__(self, key, value):
+		self._data[key] = value
+	
 	def __contains__(self, key):
-		return key in self._data
+		for i in self._data:
+			if i == key:
+				return True
+		return False
 	
 	@property
 	def capacity(self):
 		return self._capacity
+	
+	def empty(self):
+		return self._size == 0
 	
 	def get(self, index):
 		return self._data[index]
@@ -42,29 +53,22 @@ class ArrayList:
 			for i in range(self._size):
 				temp[i] = self._data[i]
 			self._data = temp
-		self._size += 1
-		i = self._size
-		while i >= index:
+		for i in range(self._size, index - 1, -1):
 			self._data[i] = self._data[i - 1]
+		self._size += 1
 		self._data[index] = e
 	
-	def clear(self):
-		self._capacity = 16
-		self._data = [None] * self._capacity
-		self._size = 0
+	def contains(self, e):
+		for i in self._data:
+			if i == key:
+				return True
+		return False
 	
 	def index(self, e):
 		for i in len(self._data):
 			if self._data[i] == e:
 				return i
 		return -1
-	
-	def remove(self, e):
-		i = self.index(e)
-		if i >= 0:
-			self.pop(i)
-			return True
-		return False
 	
 	def pop(self, index = None):
 		if index is None:
@@ -76,3 +80,14 @@ class ArrayList:
 			self._data[i] = self._data[i + 1]
 		return temp
 	
+	def remove(self, e):
+		i = self.index(e)
+		if i >= 0:
+			self.pop(i)
+			return True
+		return False
+	
+	def clear(self):
+		self._capacity = INITIAL_CAPACITY
+		self._data = [None] * self._capacity
+		self._size = 0
