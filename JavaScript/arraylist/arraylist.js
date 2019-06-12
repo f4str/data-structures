@@ -1,10 +1,15 @@
 class ArrayList {
 	static INITIAL_CAPACITY = 16;
 	
-	constructor() {
+	constructor(elems = null) {
 		this._data = new Array(INITIAL_CAPACITY);
 		this._length = 0;
 		this._capacity = INITIAL_CAPACITY;
+		if (elems) {
+			for (let e in elems) {
+				this.add(e);
+			}
+		}
 	}
 	
 	get length() {
@@ -15,7 +20,7 @@ class ArrayList {
 		return this._capacity;
 	}
 	
-	empty() {
+	isEmpty() {
 		return this._length == 0;
 	}
 	
@@ -23,7 +28,7 @@ class ArrayList {
 		return this._data[index];
 	}
 	
-	set(e, index) {
+	set(index, e) {
 		let temp = this._data[index];
 		this._data[index] = e;
 		return temp;
@@ -42,7 +47,7 @@ class ArrayList {
 		this._length++;
 	}
 	
-	insert(e, index) {
+	insert(index, e) {
 		if (this._length == this._capacity) {
 			this._capacity *= 2;
 			let temp = new Array(this._capacity);
@@ -60,8 +65,8 @@ class ArrayList {
 	}
 	
 	contains(e) {
-		for (let i = 0; i < this._length; i++) {
-			if (this._data[i] == e) {
+		for (let v in this._data) {
+			if (v == e) {
 				return true;
 			}
 		}
@@ -77,11 +82,7 @@ class ArrayList {
 		return -1;
 	}
 	
-	pop(index = null) {
-		if (index == null) {
-			self._length--;
-			return self._data[self._length];
-		}
+	erase(index) {
 		let temp = self.data[index]
 		self._size--
 		for (let i = index; i < self._length; i++) {
@@ -93,7 +94,7 @@ class ArrayList {
 	remove(e) {
 		let i = self.indexOf(e)
 		if (i >= 0) {
-			self.pop(i);
+			self.erase(i);
 			return true;
 		}
 		return false;

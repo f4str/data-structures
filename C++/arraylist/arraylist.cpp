@@ -1,10 +1,7 @@
 #include "arraylist.hpp"
 
 template <typename T>
-ArrayList<T>::ArrayList(T arr[], int length) {
-	size_ = length;
-	capacity_ = length;
-	data_ = new T[length];
+ArrayList<T>::ArrayList(T arr[], int length) : ArrayList() {
 	for (int i = 0; i < length; ++i) {
 		data_[i] = arr[i];
 	}
@@ -85,13 +82,43 @@ void ArrayList<T>::insert(int index, T& e) {
 }
 
 template <typename T>
-T& ArrayList<T>::remove(int index) {
+bool ArrayList<T>::contains(T& e) {
+	for (int i = 0; i < size_; ++i) {
+		if (data_[i] == e) {
+			return true;
+		}
+	}
+	return false;
+}
+
+template <typename T>
+int ArrayList<T>::index(T& e) {
+	for (int i = 0; i < size_; ++i) {
+		if (data_[i] == e) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+template <typename T>
+T& ArrayList<T>::erase(int index) {
 	T& temp =data_[index];
 	--size_;
 	for (int i = index; i < size_; ++i) {
 		data_[i] = data_[i + 1];
 	}
 	return temp;
+}
+
+template <typename T>
+bool ArrayList<T>::remove(T& e) {
+	int i = index(e);
+	if (i >= 0) {
+		erase(i);
+		return true;
+	}
+	return false;
 }
 
 template <typename T>

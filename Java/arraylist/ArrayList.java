@@ -2,13 +2,16 @@ package arraylist;
 
 public class ArrayList<E> {
 	public static final int INITIAL_CAPACITY = 16;
-	private E[] data = (E[])(new Object[INITIAL_CAPACITY]);
-	private int size = 0;
+	private E[] data;
+	private int size;
 	
 	public ArrayList() {
+		data = (E[])(new Object[INITIAL_CAPACITY]);
+		size = 0;
 	}
 	
 	public ArrayList(E[] objects) {
+		this();
 		for (E e : objects) {
 			add(e);
 		}
@@ -46,7 +49,7 @@ public class ArrayList<E> {
 		size++;
 	}
 	
-	public void add(int index, E e) {
+	public void insert(int index, E e) {
 		if (size == data.length) {
 			E[] temp = (E[])(new Object[size * 2]);
 			System.arraycopy(data, 0, temp, 0, size);
@@ -69,9 +72,14 @@ public class ArrayList<E> {
 		return false;
 	}
 	
-	public void clear() {
-		data = (E[])(new Object[INITIAL_CAPACITY]);
-		size = 0;
+	public E erase(int index) {
+		E elem = data[index];
+		size--;
+		for (int i = index; i < size; i++) {
+			data[i] = data[i + 1];
+		}
+		data[size] = null;
+		return elem;
 	}
 	
 	public int indexOf(E e) {
@@ -83,16 +91,6 @@ public class ArrayList<E> {
 		return -1;
 	}
 	
-	public E remove(int index) {
-		E elem = data[index];
-		size--;
-		for (int i = index; i < size; i++) {
-			data[i] = data[i + 1];
-		}
-		data[size] = null;
-		return elem;
-	}
-	
 	public boolean remove(E e) {
 		int index = indexOf(e);
 		if (index >= 0) {
@@ -102,11 +100,8 @@ public class ArrayList<E> {
 		return false;
 	}
 	
-	public void trimToSize() {
-		if (size != data.length) {
-			E[] temp = (E[])(new Object[size]);
-			System.arraycopy(data, 0, temp, 0, size);
-			data = temp;
-		}
+	public void clear() {
+		data = (E[])(new Object[INITIAL_CAPACITY]);
+		size = 0;
 	}
 }

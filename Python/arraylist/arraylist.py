@@ -1,10 +1,13 @@
 class ArrayList:
 	INITIAL_CAPACITY = 16
 	
-	def __init__(self):
+	def __init__(self, elems = None):
 		self._capacity = INITIAL_CAPACITY
 		self._data = [None] * self._capacity
 		self._size = 0
+		if (elems):
+			for e in elems:
+				self.add(e)
 	
 	def __len__(self):
 		return self._size
@@ -65,15 +68,12 @@ class ArrayList:
 		return False
 	
 	def index(self, e):
-		for i in len(self._data):
-			if self._data[i] == e:
+		for i, v in enumerate(self.data):
+			if v == e:
 				return i
 		return -1
 	
-	def pop(self, index = None):
-		if index is None:
-			self._size -= 1
-			return self._data[self._size]
+	def erase(self, index):
 		temp = self.data[index]
 		self._size -= 1
 		for i in range(index, self._size):
@@ -83,7 +83,7 @@ class ArrayList:
 	def remove(self, e):
 		i = self.index(e)
 		if i >= 0:
-			self.pop(i)
+			self.erase(i)
 			return True
 		return False
 	

@@ -21,7 +21,10 @@ class ArrayList {
 		void set(int index, T& e);
 		void add(T& e);
 		void insert(int index, T& e);
-		T& remove(int index);
+		bool contains(T& e);
+		int index(T& e);
+		T& erase(int index);
+		bool remove(T& e);
 		void clear();
 		T& operator[](int index);
 };
