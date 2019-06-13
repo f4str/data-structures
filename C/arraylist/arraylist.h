@@ -5,26 +5,26 @@
 
 static const int INITIAL_CAPACITY = 16;
 
-typedef struct array_list {
+typedef struct arraylist {
 	void** data;
 	int size;
 	int capacity;
-} array_list;
+} arraylist;
 
-array_list* array_list_new();
-void array_list_init(array_list* list);
-void array_list_free(array_list* list);
-int array_list_size(const array_list* list);
-int array_list_capacity(const array_list* list);
-bool array_list_empty(const array_list* list);
-void* array_list_get(const array_list* list, int index);
-void array_list_set(array_list* list, int index, void* e);
-void array_list_add(array_list* list, void* e);
-void array_list_insert(array_list* list, int index, void* e);
-bool array_list_contains(const array_list* list, void* e);
-int array_list_index(const array_list* list, void* e);
-void* array_list_erase(array_list* list, int index);
-bool array_list_remove(array_list* list, void* e);
-void array_list_clear(array_list* list);
+arraylist* arraylist_new();
+void arraylist_init(arraylist* list);
+void arraylist_free(arraylist* list);
+int arraylist_size(const arraylist* list);
+int arraylist_capacity(const arraylist* list);
+bool arraylist_empty(const arraylist* list);
+void* arraylist_get(const arraylist* list, int index);
+void arraylist_set(arraylist* list, int index, void* e);
+void arraylist_add(arraylist* list, void* e);
+void arraylist_insert(arraylist* list, int index, void* e);
+bool arraylist_contains(const arraylist* list, void* e);
+int arraylist_index(const arraylist* list, void* e);
+void* arraylist_erase(arraylist* list, int index);
+bool arraylist_remove(arraylist* list, void* e);
+void arraylist_clear(arraylist* list);
 
 #endif

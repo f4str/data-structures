@@ -8,7 +8,7 @@ namespace ArrayList
 	{
 		public static const int INITIAL_CAPACITY = 16;
 		private T[] _data;
-		public int Count { get; };
+		public int Count { get; }
 		public int Capacity 
 		{ 
 			get { return _data.Length; } 

@@ -2,47 +2,47 @@
 #include <stdlib.h>
 #include "arraylist.h"
 
-array_list* array_list_new() {
-	array_list* list = NULL;
-	list = malloc(sizeof(array_list));
+arraylist* arraylist_new() {
+	arraylist* list = NULL;
+	list = malloc(sizeof(arraylist));
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
 	list->data = malloc(INITIAL_CAPACITY * sizeof(void*));
 	return list;
 }
 
-void array_list_init(array_list* list) {
+void arraylist_init(arraylist* list) {
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
 	list->data = malloc(INITIAL_CAPACITY * sizeof(void*));
 }
 
-void array_list_free(array_list* list) {
+void arraylist_free(arraylist* list) {
 	free(list->data);
 	free(list);
 }
 
-int array_list_size(const array_list* list) {
+int arraylist_size(const arraylist* list) {
 	return list->size;
 }
 
-int array_list_capacity(const array_list* list) {
+int arraylist_capacity(const arraylist* list) {
 	return list->capacity;
 }
 
-bool array_list_empty(const array_list* list) {
+bool arraylist_empty(const arraylist* list) {
 	return list->size == 0;
 }
 
-void* array_list_get(const array_list* list, int index) {
+void* arraylist_get(const arraylist* list, int index) {
 	return list->data[index];
 }
 
-void array_list_set(array_list* list, int index, void* e) {
+void arraylist_set(arraylist* list, int index, void* e) {
 	list->data[index] = e;
 }
 
-void array_list_add(array_list* list, void* e) {
+void arraylist_add(arraylist* list, void* e) {
 	if (list->size == list->capacity) {
 		list->data = realloc(list->data, list->capacity * 2);
 		list->capacity *= 2;
@@ -52,7 +52,7 @@ void array_list_add(array_list* list, void* e) {
 	++(list->size);
 }
 
-void array_list_insert(array_list* list, int index, void* e) {
+void arraylist_insert(arraylist* list, int index, void* e) {
 	if (list->size == list->capacity) {
 		list->data = realloc(list->data, list->capacity * 2);
 		list->capacity *= 2;
@@ -67,7 +67,7 @@ void array_list_insert(array_list* list, int index, void* e) {
 }
 
 
-bool array_list_contains(const array_list* list, void* e) {
+bool arraylist_contains(const arraylist* list, void* e) {
 	int i;
 	for (i = 0; i < list->size; ++i) {
 		if (list->data[i] == e) {
@@ -77,7 +77,7 @@ bool array_list_contains(const array_list* list, void* e) {
 	return false;
 }
 
-int array_list_index(const array_list* list, void* e) {
+int arraylist_index(const arraylist* list, void* e) {
 	int i;
 	for (i = 0; i < list->size; ++i) {
 		if (list->data[i] == e) {
@@ -87,7 +87,7 @@ int array_list_index(const array_list* list, void* e) {
 	return -1;
 }
 
-void* array_list_erase(array_list* list, int index) {
+void* arraylist_erase(arraylist* list, int index) {
 	void* temp = list->data[index];
 	int i;
 	--(list->size);
@@ -97,16 +97,16 @@ void* array_list_erase(array_list* list, int index) {
 	return temp;
 }
 
-bool array_list_remove(array_list* list, void* e) {
-	int i = array_list_index(list, e);
+bool arraylist_remove(arraylist* list, void* e) {
+	int i = arraylist_index(list, e);
 	if (i >= 0) {
-		array_list_erase(list, i);
+		arraylist_erase(list, i);
 		return true;
 	}
 	return false;
 }
 
-void array_list_clear(array_list* list) {
+void arraylist_clear(arraylist* list) {
 	free(list->data);
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
