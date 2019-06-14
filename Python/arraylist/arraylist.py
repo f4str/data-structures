@@ -5,24 +5,25 @@ class ArrayList:
 		self._capacity = INITIAL_CAPACITY
 		self._data = [None] * self._capacity
 		self._size = 0
-		if (elems):
+		if elems:
 			for e in elems:
 				self.add(e)
 	
 	def __len__(self):
 		return self._size
 	
-	def __getitem__(self, key):
-		return self._data[key]
+	def __getitem__(self, index):
+		return self.get(index)
 	
-	def __setitem__(self, key, value):
-		self._data[key] = value
+	def __setitem__(self, index, e):
+		self.set(index, e)
 	
-	def __contains__(self, key):
-		for i in self._data:
-			if i == key:
-				return True
-		return False
+	def __contains__(self, e):
+		return self.contains(e)
+	
+	@property
+	def size(self):
+		return self._size
 	
 	@property
 	def capacity(self):

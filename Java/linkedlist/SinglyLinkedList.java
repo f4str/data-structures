@@ -1,18 +1,18 @@
 package linkedlist;
 
 public class SinglyLinkedList<E> {
-	private class Node<E> {
+	private class SinglyNode<E> {
 		private E data;
-		private Node<E> next;
+		private SinglyNode<E> next;
 		
-		private Node(E e) {
+		private SinglyNode(E e) {
 			data = e;
 			next = null;
 		}
 	}
 	
-	private Node<E> head;
-	private Node<E> tail;
+	private SinglyNode<E> head;
+	private SinglyNode<E> tail;
 	private int size;
 	
 	public SinglyLinkedList() {
@@ -36,18 +36,40 @@ public class SinglyLinkedList<E> {
 		return size == 0;
 	}
 	
-	public E head() {
+	public E getFirst() {
 		if (head == null) {
 			return null;
 		}
 		return head.data;
 	}
 	
-	public E tail() {
+	public E setFirst(E e) {
+		E data = getFirst();
+		if (size == 0) {
+			addFirst(e);
+		}
+		else {
+			head.data = e;
+		}
+		return data;
+	}
+	
+	public E getLast() {
 		if (tail == null) {
 			return null;
 		}
 		return tail.data;
+	}
+	
+	public E setLast(E e) {
+		E data = getLast()
+		if (size == 0) {
+			addLast(e);
+		}
+		else {
+			tail.data = e;
+		}
+		return data;
 	}
 	
 	public E get(int index) {
@@ -58,7 +80,7 @@ public class SinglyLinkedList<E> {
 			return getLast();
 		}
 		else {
-			Node<E> current = head;
+			SinglyNode<E> current = head;
 			for (int i = 0; i < index; i++) {
 				current = current.next;
 			}
@@ -66,13 +88,31 @@ public class SinglyLinkedList<E> {
 		}
 	}
 	
+	public E set(int index, E e) {
+		if (index == 0) {
+			return setFirst(e);
+		}
+		else if (index == size - 1) {
+			return setLast(e);
+		}
+		else {
+			SinglyNode<E> current = head;
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			E data = current.data;
+			current.data = e;
+			return data;
+		}
+	}
+	
 	public void addFirst(E e) {
 		if (size == 0) {
-			head = new Node(e);
+			head = new SinglyNode(e);
 			tail = head;
 		}
 		else {
-			Node<E> temp = new Node(e);
+			SinglyNode<E> temp = new SinglyNode(e);
 			temp.next = head;
 			head = temp;
 		}
@@ -81,11 +121,11 @@ public class SinglyLinkedList<E> {
 	
 	public void addLast(E e) {
 		if (size == 0) {
-			tail = new Node(e);
+			tail = new SinglyNode(e);
 			head = tail;
 		}
 		else {
-			Node<E> temp = new Node(e);
+			SinglyNode<E> temp = new SinglyNode(e);
 			tail.next = temp;
 			tail = temp;
 		}
@@ -93,7 +133,7 @@ public class SinglyLinkedList<E> {
 	}
 	
 	public E removeFirst() {
-		Node<E> temp = head;
+		E data = head();
 		if (head == tail) {
 			head = null;
 			tail = null;
@@ -103,18 +143,18 @@ public class SinglyLinkedList<E> {
 			head = head.next;
 			size--;
 		}
-		return temp.data;
+		return data;
 	}
 	
 	public E removeLast() {
-		Node<E> temp = tail;
+		E data = tail();
 		if (head == tail) {
 			head = null;
 			tail = null;
 			size = 0;
 		}
 		else {
-			Node<E> current = head;
+			SinglyNode<E> current = head;
 			while (current.next != tail) {
 				current = current.next;
 			}
@@ -122,11 +162,11 @@ public class SinglyLinkedList<E> {
 			tail = current;
 			size--;
 		}
-		return temp.data;
+		return data;
 	}
 	
 	public boolean contains(E e) {
-		Node<E> current = head;
+		SinglyNode<E> current = head;
 		while (current != null) {
 			if (current.data.equals(e)) {
 				return true;
@@ -137,7 +177,7 @@ public class SinglyLinkedList<E> {
 	}
 	
 	public int indexOf(E e) {
-		Node<E> current = head;
+		SinglyNode<E> current = head;
 		for (int i = 0; current != null; i++) {
 			if (current.data.equals(e)) {
 				return i;
@@ -155,13 +195,13 @@ public class SinglyLinkedList<E> {
 			addLast(e);
 		}
 		else {
-			Node<E> previous = head;
-			Node<E> current = head.next;
+			SinglyNode<E> previous = head;
+			SinglyNode<E> current = head.next;
 			for (int i = 0; i < index; i++) {
 				previous = current;
 				current = current.next;
 			}
-			Node<E> temp = new Node(e);
+			SinglyNode<E> temp = new SinglyNode(e);
 			previous.next = temp;
 			temp.next = current;
 			size++;
@@ -176,8 +216,8 @@ public class SinglyLinkedList<E> {
 			removeLast();
 		}
 		else {
-			Node<E> previous = head;
-			Node<E> current = head.next;
+			SinglyNode<E> previous = head;
+			SinglyNode<E> current = head.next;
 			for (int i = 0; i < index; i++) {
 				previous = current;
 				current = current.next;
@@ -189,14 +229,16 @@ public class SinglyLinkedList<E> {
 	}
 	
 	public boolean remove(E e) {
-		Node<E> previous = head;
-		Node<E> current = head.next;
-		while (current.next != null) {
+		SinglyNode<E> previous = head;
+		SinglyNode<E> current = head.next;
+		while (current != null) {
 			if (current.data.equals(e)) {
 				previous.next = current.next;
 				size--;
 				return true;
 			}
+			previous = current;
+			current = current.next;
 		}
 		return false;
 	}

@@ -1,20 +1,20 @@
 package linkedlist;
 
 public class DoublyLinkedList<E> {
-	private class Node<E> {
+	private class DoublyNode<E> {
 		private E data;
-		private Node<E> next;
-		private Node<E> previous;
+		private DoublyNode<E> next;
+		private DoublyNode<E> previous;
 		
-		private Node(E e) {
+		private DoublyNode(E e) {
 			data = e;
 			next = null;
 			previous = null;
 		}
 	}
 	
-	private Node<E> head;
-	private Node<E> tail;
+	private DoublyNode<E> head;
+	private DoublyNode<E> tail;
 	private int size;
 	
 	public DoublyLinkedList() {
@@ -38,18 +38,40 @@ public class DoublyLinkedList<E> {
 		return size == 0;
 	}
 	
-	public E head() {
+	public E getFirst() {
 		if (head == null) {
 			return null;
 		}
 		return head.data;
 	}
 	
-	public E tail() {
+	public E setFirst(E e) {
+		E data = getFirst()
+		if (size == 0) {
+			addFirst(e);
+		}
+		else {
+			head.data = e;
+		}
+		return data;
+	}
+	
+	public E getLast() {
 		if (tail == null) {
 			return null;
 		}
 		return tail.data;
+	}
+	
+	public void setLast(E e) {
+		E data = getLast();
+		if (size == 0) {
+			addLast(e);
+		}
+		else {
+			tail.data = e;
+		}
+		return data;
 	}
 	
 	public E get(int index) {
@@ -60,7 +82,7 @@ public class DoublyLinkedList<E> {
 			return getLast();
 		}
 		else {
-			Node<E> current = head;
+			DoublyNode<E> current = head;
 			for (int i = 0; i < index; i++) {
 				current = current.next;
 			}
@@ -68,13 +90,31 @@ public class DoublyLinkedList<E> {
 		}
 	}
 	
+	public E set(int index, E e) {
+		if (index == 0) {
+			return setFirst(e);
+		}
+		else if (index == size - 1) {
+			return setLast(e);
+		}
+		else {
+			DoublyNode<E> current = head;
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			E data = current.data;
+			current.data = e;
+			return data;
+		}
+	}
+	
 	public void addFirst(E e) {
 		if (size == 0) {
-			head = new Node(e);
+			head = new DoublyNode(e);
 			tail = head;
 		}
 		else {
-			Node<E> temp = new Node(e);
+			DoublyNode<E> temp = new DoublyNode(e);
 			temp.next = head;
 			head.previous = temp;
 			head = temp;
@@ -84,11 +124,11 @@ public class DoublyLinkedList<E> {
 	
 	public void addLast(E e) {
 		if (size == 0) {
-			tail = new Node(e);
+			tail = new DoublyNode(e);
 			head = tail;
 		}
 		else {
-			Node<E> temp = new Node(e);
+			DoublyNode<E> temp = new DoublyNode(e);
 			tail.next = temp;
 			temp.previous = tail;
 			tail = temp;
@@ -97,7 +137,7 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public E removeFirst() {
-		Node<E> temp = head;
+		DoublyNode<E> temp = head;
 		if (head == tail) {
 			head = null;
 			tail = null;
@@ -112,7 +152,7 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public E removeLast() {
-		Node<E> temp = tail;
+		DoublyNode<E> temp = tail;
 		if (head == tail) {
 			head = null;
 			tail = null;
@@ -127,7 +167,7 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public boolean contains(E e) {
-		Node<E> current = head;
+		DoublyNode<E> current = head;
 		while (current != null) {
 			if (current.data.equals(e)) {
 				return true;
@@ -138,7 +178,7 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public int indexOf(E e) {
-		Node<E> current = head;
+		DoublyNode<E> current = head;
 		for (int i = 0; current != null; i++) {
 			if (current.data = e) {
 				return i;
@@ -156,11 +196,11 @@ public class DoublyLinkedList<E> {
 			addLast(e);
 		}
 		else {
-			Node<E> current = head;
+			DoublyNode<E> current = head;
 			for (int i = 0; i <= index; i++) {
 				current = current.next;
 			}
-			Node<E> temp = new Node(e);
+			DoublyNode<E> temp = new DoublyNode(e);
 			current.previous.next = temp;
 			temp.previous = current.previous;
 			temp.next = current;
@@ -176,7 +216,7 @@ public class DoublyLinkedList<E> {
 			removeLast();
 		}
 		else {
-			Node<E> current = head;
+			DoublyNode<E> current = head;
 			for (int i = 0; i <= index; i++) {
 				current = current.next;
 			}
@@ -188,7 +228,7 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public boolean remove(E e) {
-		Node<E> current = head;
+		DoublyNode<E> current = head;
 		while (current != null) {
 			if (current.data.equals(e)) {
 				if (current == head) {
@@ -204,6 +244,7 @@ public class DoublyLinkedList<E> {
 				}
 				return true;
 			}
+			current = current.next;
 		}
 		return false;
 	}

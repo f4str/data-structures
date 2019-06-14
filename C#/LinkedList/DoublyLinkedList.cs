@@ -6,31 +6,40 @@ namespace LinkedList
 {
 	public class DoublyLinkedList<T>
 	{
-		private class Node<T> 
+		private class DoublyNode<T> 
 		{
 			public T Data { get; set; }
-			public Node<T> Next { get; set; }
-			public Node<T> Previous { get; set; }
+			public DoublyNode<T> Next { get; set; }
+			public DoublyNode<T> Previous { get; set; }
 			
-			public Node(T e) {
+			public DoublyNode(T e) 
+			{
 				Data = e;
 				Next = null;
 				Previous = null;
 			}
 		}
 		
-		private Node<T> _head;
-		private Node<T> _tail;
+		private DoublyNode<T> _head;
+		private DoublyNode<T> _tail;
 		
-		public T Head 
+		public T First 
 		{
 			get { return _head?.Data; }
+			set { Count > 0 ? _head.Data = value : AddFirst(); }
 		}
-		public T Tail 
+		public T Last 
 		{
 			get { return _tail?.Data; }
+			set { Count > 0 ? _tail.Data = value : AddLast(); }
 		}
-		public int Count { get; }; 
+		public int Count { get; }
+		
+		public T this[int i] 
+		{
+			get { return Get(i); }
+			set { Set(i, value); }
+		}
 		
 		public DoublyLinkedList() 
 		{
@@ -54,28 +63,62 @@ namespace LinkedList
 		
 		public T Get(int index) 
 		{
-			if (index == 0) {
-			return Head;
+			if (index == 0) 
+			{
+				return First;
 			}
-			else if (index == Count - 1) {
-				return Tail;
+			else if (index == Count - 1) 
+			{
+				return Last;
 			}
-			else {
-				Node<T> current = _head;
-				for (int i = 0; i < index; i++) {
+			else 
+			{
+				DoublyNode<T> current = _head;
+				for (int i = 0; i < index; i++) 
+				{
 					current = current.Next;
 				}
 				return current.Data;
 			}
 		}
 		
-		public void AddFirst(T e) {
-			if (Count == 0) {
-				_head = new Node(e);
+		public T Set(int index, T e) 
+		{
+			if (index == 0) 
+			{
+				T data = First;
+				First = e;
+				return data;
+			}
+			else if (index == Count - 1) 
+			{
+				T data = Last;
+				Last = e;
+				return data;
+			}
+			else 
+			{
+				DoublyNode<T> current = _head;
+				for (int i = 0; i < index; i++) 
+				{
+					current = current.Next;
+				}
+				T data = current.Data;
+				current.Data = e;
+				return data;
+			}
+		} 
+		
+		public void AddFirst(T e) 
+		{
+			if (Count == 0) 
+			{
+				_head = new DoublyNode(e);
 				_tail = _head;
 			}
-			else {
-				Node<T> temp = new Node(e);
+			else 
+			{
+				DoublyNode<T> temp = new DoublyNode(e);
 				temp.Next = _head;
 				_head.Previous = temp;
 				_head = temp;
@@ -83,13 +126,16 @@ namespace LinkedList
 			size++;
 		}
 		
-		public void AddLast(T e) {
-			if (Count == 0) {
-				_tail = new Node(e);
+		public void AddLast(T e) 
+		{
+			if (Count == 0) 
+			{
+				_tail = new DoublyNode(e);
 				_head = _tail;
 			}
-			else {
-				Node<T> temp = new Node(e);
+			else 
+			{
+				DoublyNode<T> temp = new DoublyNode(e);
 				_tail.Next = temp;
 				temp.Previous = _tail;
 				_tail = temp;
@@ -97,14 +143,17 @@ namespace LinkedList
 			size++;
 		}
 		
-		public T RemoveFirst() {
-			T data = Head;
-			if (_head == _tail) {
+		public T RemoveFirst() 
+		{
+			T data = First;
+			if (_head == _tail) 
+			{
 				_head = null;
 				_tail = null;
 				Count = 0;
 			}
-			else {
+			else 
+			{
 				_head = _head.Next;
 				_head.Previous = null;
 				Count--;
@@ -112,14 +161,17 @@ namespace LinkedList
 			return data;
 		}
 		
-		public T RemoveLast() {
-			T data = Tail;
-			if (_head == _tail) {
+		public T RemoveLast() 
+		{
+			T data = Last;
+			if (_head == _tail) 
+			{
 				_head = null;
 				_tail = null;
 				Count = 0;
 			}
-			else {
+			else 
+			{
 				_tail = _tail.Previous;
 				_tail.Next = null;
 				Count--;
@@ -127,10 +179,13 @@ namespace LinkedList
 			return data;
 		}
 		
-		public bool Contains(T e) {
-			Node<T> current = _head;
-			while (current != null) {
-				if (current.Data.Equals(e)) {
+		public bool Contains(T e) 
+		{
+			DoublyNode<T> current = _head;
+			while (current != null) 
+			{
+				if (current.Data.Equals(e)) 
+				{
 					return true;
 				}
 				current = current.Next;
@@ -138,10 +193,13 @@ namespace LinkedList
 			return false;
 		}
 		
-		public int IndexOf(T e) {
-			Node<E> current = _head;
-			for (int i = 0; current != null; i++) {
-				if (current.Data.Equals(e)) {
+		public int IndexOf(T e) 
+		{
+			DoublyNode<T> current = _head;
+			for (int i = 0; current != null; i++) 
+			{
+				if (current.Data.Equals(e)) 
+				{
 					return i;
 				}
 				current = current.Next;
@@ -149,19 +207,24 @@ namespace LinkedList
 			return -1;
 		}
 		
-		public void Insert(int index, T e) {
-			if (index == 0) {
+		public void Insert(int index, T e) 
+		{
+			if (index == 0) 
+			{
 				AddFirst(e);
 			}
-			else if (index == Count - 1) {
+			else if (index == Count - 1) 
+			{
 				AddLast(e);
 			}
-			else {
-				Node<T> current = _head;
-				for (int i = 0; i <= index; i++) {
+			else 
+			{
+				DoublyNode<T> current = _head;
+				for (int i = 0; i <= index; i++) 
+				{
 					current = current.Next;
 				}
-				Node<T> temp = new Node(e);
+				DoublyNode<T> temp = new DoublyNode(e);
 				current.Previous.Next = temp;
 				temp.Previous = current.Previous;
 				temp.Next = current;
@@ -169,16 +232,21 @@ namespace LinkedList
 			}
 		}
 		
-		public T Erase(int index) {
-			if (index == 0) {
+		public T Erase(int index) 
+		{
+			if (index == 0) 
+			{
 				RemoveFirst();
 			}
-			else if (index == Count - 1) {
+			else if (index == Count - 1) 
+			{
 				RemoveLast();
 			}
-			else {
-				Node<T> current = _head;
-				for (int i = 0; i <= index; i++) {
+			else 
+			{
+				DoublyNode<T> current = _head;
+				for (int i = 0; i <= index; i++) 
+				{
 					current = current.Next;
 				}
 				current.Previous.Next = current.Next;
@@ -188,28 +256,36 @@ namespace LinkedList
 			}
 		}
 		
-		public bool remove(T e) {
-			Node<T> current = _head;
-			while (current != null) {
-				if (current.Data.Equals(e)) {
-					if (current == _head) {
+		public bool Remove(T e) 
+		{
+			DoublyNode<T> current = _head;
+			while (current != null) 
+			{
+				if (current.Data.Equals(e)) 
+				{
+					if (current == _head) 
+					{
 						removeFirst();
 					}
-					else if (current == _tail) {
+					else if (current == _tail) 
+					{
 						removeLast();
 					}
-					else {
+					else 
+					{
 						current.Previous.Next = current.Next;
 						current.Next.Previous = current.Previous;
 						Count--;
 					}
 					return true;
 				}
+				current = current.Next;
 			}
 			return false;
 		}
 		
-		public void Clear() {
+		public void Clear() 
+		{
 			_head = null;
 			_tail = null;
 			Count = 0;
