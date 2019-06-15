@@ -23,6 +23,11 @@ ArrayList<T>::~ArrayList() {
 }
 
 template <typename T>
+T& ArrayList<T>::operator[](int index) {
+	return data_[index];
+}
+
+template <typename T>
 int ArrayList<T>::size() {
 	return size_;
 }
@@ -45,6 +50,26 @@ T& ArrayList<T>::get(int index) {
 template <typename T>
 void ArrayList<T>::set(int index, T& e) {
 	data_[index] = e;
+}
+
+template <typename T>
+bool ArrayList<T>::contains(T& e) {
+	for (int i = 0; i < size_; ++i) {
+		if (data_[i] == e) {
+			return true;
+		}
+	}
+	return false;
+}
+
+template <typename T>
+int ArrayList<T>::index(T& e) {
+	for (int i = 0; i < size_; ++i) {
+		if (data_[i] == e) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 template <typename T>
@@ -82,27 +107,7 @@ void ArrayList<T>::insert(int index, T& e) {
 }
 
 template <typename T>
-bool ArrayList<T>::contains(T& e) {
-	for (int i = 0; i < size_; ++i) {
-		if (data_[i] == e) {
-			return true;
-		}
-	}
-	return false;
-}
-
-template <typename T>
-int ArrayList<T>::index(T& e) {
-	for (int i = 0; i < size_; ++i) {
-		if (data_[i] == e) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-template <typename T>
-T& ArrayList<T>::erase(int index) {
+T& ArrayList<T>::remove(int index) {
 	T& temp =data_[index];
 	--size_;
 	for (int i = index; i < size_; ++i) {
@@ -112,10 +117,10 @@ T& ArrayList<T>::erase(int index) {
 }
 
 template <typename T>
-bool ArrayList<T>::remove(T& e) {
+bool ArrayList<T>::erase(T& e) {
 	int i = index(e);
 	if (i >= 0) {
-		erase(i);
+		remove(i);
 		return true;
 	}
 	return false;
@@ -129,7 +134,3 @@ void ArrayList<T>::clear() {
 	data_ = new T[INITAL_CAPACITY];
 }
 
-template <typename T>
-T& ArrayList<T>::operator[](int index) {
-	return data_[index];
-}

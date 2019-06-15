@@ -24,20 +24,20 @@ void doublylinkedlist_free(doublylinkedlist* list);
 int doublylinkedlist_size(const doublylinkedlist* list);
 bool doublylinkedlist_empty(const doublylinkedlist* list);
 void* doublylinkedlist_getfirst(const doublylinkedlist* list);
-void* doublylinkedlist_setfirst(doublylinkedlist* list, void* e);
 void* doublylinkedlist_getlast(const doublylinkedlist* list);
-void* doublylinkedlist_setlast(doublylinkedlist* list, void* e);
 void* doublylinkedlist_get(const doublylinkedlist* list, int index);
+void* doublylinkedlist_setfirst(doublylinkedlist* list, void* e);
+void* doublylinkedlist_setlast(doublylinkedlist* list, void* e);
 void* doublylinkedlist_set(doublylinkedlist* list, int index, void* e);
 void doublylinkedlist_addfirst(doublylinkedlist* list, void* e);
 void doublylinkedlist_addlast(doublylinkedlist* list, void* e);
+void doublylinkedlist_add(doublylinkedlist* list, int index, void* e);
 void* doublylinkedlist_removefirst(doublylinkedlist* list);
 void* doublylinkedlist_removelast(doublylinkedlist* list);
-bool doublylinkedlist_contains(doublylinkedlist* list, void* e);
-int doublylinkedlist_index(doublylinkedlist* list, void* e);
-void doublylinkedlist_insert(doublylinkedlist* list, int index, void* e);
-void* doublylinkedlist_erase(doublylinkedlist* list, int index);
-bool doublylinkedlist_remove(doublylinkedlist* list, void* e);
+void* doublylinkedlist_remove(doublylinkedlist* list, int index);
+bool doublylinkedlist_contains(const doublylinkedlist* list, void* e);
+int doublylinkedlist_index(const doublylinkedlist* list, void* e);
+bool doublylinkedlist_erase(doublylinkedlist* list, void* e);
 void doublylinkedlist_clear(doublylinkedlist* list);
 
 #endif

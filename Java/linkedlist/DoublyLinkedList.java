@@ -45,33 +45,11 @@ public class DoublyLinkedList<E> {
 		return head.data;
 	}
 	
-	public E setFirst(E e) {
-		E data = getFirst()
-		if (size == 0) {
-			addFirst(e);
-		}
-		else {
-			head.data = e;
-		}
-		return data;
-	}
-	
 	public E getLast() {
 		if (tail == null) {
 			return null;
 		}
 		return tail.data;
-	}
-	
-	public void setLast(E e) {
-		E data = getLast();
-		if (size == 0) {
-			addLast(e);
-		}
-		else {
-			tail.data = e;
-		}
-		return data;
 	}
 	
 	public E get(int index) {
@@ -88,6 +66,28 @@ public class DoublyLinkedList<E> {
 			}
 			return current.data;
 		}
+	}
+	
+	public E setFirst(E e) {
+		E data = getFirst()
+		if (size == 0) {
+			addFirst(e);
+		}
+		else {
+			head.data = e;
+		}
+		return data;
+	}
+	
+	public void setLast(E e) {
+		E data = getLast();
+		if (size == 0) {
+			addLast(e);
+		}
+		else {
+			tail.data = e;
+		}
+		return data;
 	}
 	
 	public E set(int index, E e) {
@@ -136,34 +136,69 @@ public class DoublyLinkedList<E> {
 		size++;
 	}
 	
+	public void add(int index, E e) {
+		if (index == 0) {
+			addFirst(e);
+		}
+		else if (index == size - 1) {
+			addLast(e);
+		}
+		else {
+			DoublyNode<E> current = head;
+			for (int i = 0; i <= index; i++) {
+				current = current.next;
+			}
+			DoublyNode<E> temp = new DoublyNode(e);
+			current.previous.next = temp;
+			temp.previous = current.previous;
+			temp.next = current;
+			size++;
+		}
+	}
+	
 	public E removeFirst() {
-		DoublyNode<E> temp = head;
+		E data = getFirst();
 		if (head == tail) {
-			head = null;
-			tail = null;
-			size = 0;
+			clear();
 		}
 		else {
 			head = head.next;
 			head.previous = null;
 			size--;
 		}
-		return head.data;
+		return data;
 	}
 	
 	public E removeLast() {
-		DoublyNode<E> temp = tail;
+		E data = getLast();
 		if (head == tail) {
-			head = null;
-			tail = null;
-			size = 0;
+			clear();
 		}
 		else {
 			tail = tail.previous;
 			tail.next = null;
 			size--;
 		}
-		return tail.data;
+		return data;
+	}
+	
+	public E remove(int index) {
+		if (index == 0) {
+			return removeFirst();
+		}
+		else if (index == size - 1) {
+			return removeLast();
+		}
+		else {
+			DoublyNode<E> current = head;
+			for (int i = 0; i <= index; i++) {
+				current = current.next;
+			}
+			current.previous.next = current.next;
+			current.next.previous = current.previous;
+			size--;
+			return current.data;
+		}
 	}
 	
 	public boolean contains(E e) {
@@ -188,46 +223,7 @@ public class DoublyLinkedList<E> {
 		return -1;
 	}
 	
-	public void insert(int index, E e) {
-		if (index == 0) {
-			addFirst(e);
-		}
-		else if (index == size - 1) {
-			addLast(e);
-		}
-		else {
-			DoublyNode<E> current = head;
-			for (int i = 0; i <= index; i++) {
-				current = current.next;
-			}
-			DoublyNode<E> temp = new DoublyNode(e);
-			current.previous.next = temp;
-			temp.previous = current.previous;
-			temp.next = current;
-			size++;
-		}
-	}
-	
-	public E erase(int index) {
-		if (index == 0) {
-			removeFirst();
-		}
-		else if (index == size - 1) {
-			removeLast();
-		}
-		else {
-			DoublyNode<E> current = head;
-			for (int i = 0; i <= index; i++) {
-				current = current.next;
-			}
-			current.previous.next = current.next;
-			current.next.previous = current.previous;
-			size--;
-			return current.data;
-		}
-	}
-	
-	public boolean remove(E e) {
+	public boolean erase(E e) {
 		DoublyNode<E> current = head;
 		while (current != null) {
 			if (current.data.equals(e)) {

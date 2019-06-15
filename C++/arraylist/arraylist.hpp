@@ -14,19 +14,20 @@ class ArrayList {
 		ArrayList(T arr[], int length);
 		ArrayList(const ArrayList& list);
 		~ArrayList();
+		T& operator[](int index);
+		
 		int size();
 		int capacity();
 		bool empty();
 		T& get(int index);
 		void set(int index, T& e);
-		void add(T& e);
-		void insert(int index, T& e);
 		bool contains(T& e);
 		int index(T& e);
-		T& erase(int index);
-		bool remove(T& e);
+		void add(T& e);
+		void insert(int index, T& e);
+		T& remove(int index);
+		bool erase(T& e);
 		void clear();
-		T& operator[](int index);
 };
 
 #endif

@@ -24,12 +24,12 @@ namespace LinkedList
 		public T First 
 		{
 			get { return _head?.Data; }
-			set { Count > 0 ? _head.Data = value : AddFirst(); }
+			set { Count > 0 ? _head.Data = value : AddFirst(value); }
 		}
 		public T Last 
 		{
 			get { return _tail?.Data; }
-			set { Count > 0 ? _tail.Data = value : AddLast(); }
+			set { Count > 0 ? _tail.Data = value : AddLast(value); }
 		}
 		public int Count { get; }
 		
@@ -137,14 +137,38 @@ namespace LinkedList
 			size++;
 		}
 		
+		public void Add(int index, T e) 
+		{
+			if (index == 0) 
+			{
+				AddFirst(e);
+			}
+			else if (index == Count - 1) 
+			{
+				AddLast(e);
+			}
+			else 
+			{
+				SinglyNode<T> previous = _head;
+				SinglyNode<T> current = _head.Next;
+				for (int i = 0; i < index; i++) 
+				{
+					previous = current;
+					current = current.Next;
+				}
+				SinglyNode<T> temp = new SinglyNode(e);
+				previous.Next = temp;
+				temp.Next = current;
+				Count++;
+			}
+		}
+		
 		public T RemoveFirst() 
 		{
 			T data = First;
 			if (_head == _tail) 
 			{
-				_head = null;
-				_tail = null;
-				Count = 0;
+				Clear();
 			}
 			else 
 			{
@@ -159,9 +183,7 @@ namespace LinkedList
 			T data = Last;
 			if (_head == _tail) 
 			{
-				_head = null;
-				_tail = null;
-				Count = 0;
+				Clear();
 			}
 			else 
 			{
@@ -175,6 +197,31 @@ namespace LinkedList
 				Count--;
 			}
 			return data;
+		}
+		
+		public T Remove(int index) 
+		{
+			if (index == 0) 
+			{
+				return RemoveFirst();
+			}
+			else if (index == Count - 1) 
+			{
+				return RemoveLast();
+			}
+			else 
+			{
+				SinglyNode<T> previous = _head;
+				SinglyNode<T> current = _head.Next;
+				for (int i = 0; i < index; i++) 
+				{
+					previous = current;
+					current = current.Next;
+				}
+				previous.Next = current.Next;
+				Count--;
+				return current.Data;
+			}
 		}
 		
 		public bool Contains(T e) 
@@ -205,58 +252,7 @@ namespace LinkedList
 			return -1;
 		}
 		
-		public void Insert(int index, T e) 
-		{
-			if (index == 0) 
-			{
-				AddFirst(e);
-			}
-			else if (index == Count - 1) 
-			{
-				AddLast(e);
-			}
-			else 
-			{
-				SinglyNode<T> previous = _head;
-				SinglyNode<T> current = _head.Next;
-				for (int i = 0; i < index; i++) 
-				{
-					previous = current;
-					current = current.Next;
-				}
-				SinglyNode<T> temp = new SinglyNode(e);
-				previous.Next = temp;
-				temp.Next = current;
-				Count++;
-			}
-		}
-		
-		public T Erase(int index) 
-		{
-			if (index == 0) 
-			{
-				RemoveFirst();
-			}
-			else if (index == Count - 1) 
-			{
-				RemoveLast();
-			}
-			else 
-			{
-				SinglyNode<T> previous = _head;
-				SinglyNode<T> current = _head.Next;
-				for (int i = 0; i < index; i++) 
-				{
-					previous = current;
-					current = current.Next;
-				}
-				previous.Next = current.Next;
-				Count--;
-				return current.Data;
-			}
-		}
-		
-		public bool Remove(T e) 
+		public bool Erase(T e) 
 		{
 			SinglyNode<T> previous = _head;
 			SinglyNode<T> current = _head.Next;

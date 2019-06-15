@@ -52,6 +52,30 @@ namespace ArrayList
 			return temp;
 		}
 		
+		public bool Contains(T e) 
+		{
+			foreach (T elem in _data) 
+			{
+				if (e.Equals(elem))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public int IndexOf(T e)
+		{
+			for (int i = 0; i < Count; i++) 
+			{
+				if (e.Equals(_data[i])) 
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+		
 		public void Add(T e) 
 		{
 			if (Count == _data.Length) 
@@ -81,31 +105,7 @@ namespace ArrayList
 			Count++;
 		}
 		
-		public bool Contains(T e) 
-		{
-			foreach (T elem in _data) 
-			{
-				if (e.Equals(elem))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-		
-		public int IndexOf(T e)
-		{
-			for (int i = 0; i < Count; i++) 
-			{
-				if (e.Equals(_data[i])) 
-				{
-					return i;
-				}
-			}
-			return -1;
-		}
-		
-		public T Erase(int index) 
+		public T Remove(int index) 
 		{
 			T e = _data[index];
 			Count--;
@@ -117,12 +117,12 @@ namespace ArrayList
 			return e;
 		}
 		
-		public bool Remove(T e) 
+		public bool Erase(T e) 
 		{
 			int index = IndexOf(e);
 			if (index >= 0) 
 			{
-				RemoveAt(index);
+				Remove(index);
 				return true;
 			}
 			return false;

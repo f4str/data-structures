@@ -43,33 +43,11 @@ public class SinglyLinkedList<E> {
 		return head.data;
 	}
 	
-	public E setFirst(E e) {
-		E data = getFirst();
-		if (size == 0) {
-			addFirst(e);
-		}
-		else {
-			head.data = e;
-		}
-		return data;
-	}
-	
 	public E getLast() {
 		if (tail == null) {
 			return null;
 		}
 		return tail.data;
-	}
-	
-	public E setLast(E e) {
-		E data = getLast()
-		if (size == 0) {
-			addLast(e);
-		}
-		else {
-			tail.data = e;
-		}
-		return data;
 	}
 	
 	public E get(int index) {
@@ -86,6 +64,28 @@ public class SinglyLinkedList<E> {
 			}
 			return current.data;
 		}
+	}
+	
+	public E setFirst(E e) {
+		E data = getFirst();
+		if (size == 0) {
+			addFirst(e);
+		}
+		else {
+			head.data = e;
+		}
+		return data;
+	}
+	
+	public E setLast(E e) {
+		E data = getLast()
+		if (size == 0) {
+			addLast(e);
+		}
+		else {
+			tail.data = e;
+		}
+		return data;
 	}
 	
 	public E set(int index, E e) {
@@ -132,12 +132,31 @@ public class SinglyLinkedList<E> {
 		size++;
 	}
 	
+	public void add(int index, E e) {
+		if (index == 0) {
+			addFirst(e);
+		}
+		else if (index == size - 1) {
+			addLast(e);
+		}
+		else {
+			SinglyNode<E> previous = head;
+			SinglyNode<E> current = head.next;
+			for (int i = 0; i < index; i++) {
+				previous = current;
+				current = current.next;
+			}
+			SinglyNode<E> temp = new SinglyNode(e);
+			previous.next = temp;
+			temp.next = current;
+			size++;
+		}
+	}
+	
 	public E removeFirst() {
-		E data = head();
+		E data = getFirst();
 		if (head == tail) {
-			head = null;
-			tail = null;
-			size = 0;
+			clear();
 		}
 		else {
 			head = head.next;
@@ -147,11 +166,9 @@ public class SinglyLinkedList<E> {
 	}
 	
 	public E removeLast() {
-		E data = tail();
+		E data = getLast();
 		if (head == tail) {
-			head = null;
-			tail = null;
-			size = 0;
+			clear();
 		}
 		else {
 			SinglyNode<E> current = head;
@@ -163,6 +180,26 @@ public class SinglyLinkedList<E> {
 			size--;
 		}
 		return data;
+	}
+	
+	public E remove(int index) {
+		if (index == 0) {
+			return removeFirst();
+		}
+		else if (index == size - 1) {
+			return removeLast();
+		}
+		else {
+			SinglyNode<E> previous = head;
+			SinglyNode<E> current = head.next;
+			for (int i = 0; i < index; i++) {
+				previous = current;
+				current = current.next;
+			}
+			previous.next = current.next;
+			size--;
+			return current.data;
+		}
 	}
 	
 	public boolean contains(E e) {
@@ -187,48 +224,7 @@ public class SinglyLinkedList<E> {
 		return -1;
 	}
 	
-	public void insert(int index, E e) {
-		if (index == 0) {
-			addFirst(e);
-		}
-		else if (index == size - 1) {
-			addLast(e);
-		}
-		else {
-			SinglyNode<E> previous = head;
-			SinglyNode<E> current = head.next;
-			for (int i = 0; i < index; i++) {
-				previous = current;
-				current = current.next;
-			}
-			SinglyNode<E> temp = new SinglyNode(e);
-			previous.next = temp;
-			temp.next = current;
-			size++;
-		}
-	}
-	
-	public E erase(int index) {
-		if (index == 0) {
-			removeFirst();
-		}
-		else if (index == size - 1) {
-			removeLast();
-		}
-		else {
-			SinglyNode<E> previous = head;
-			SinglyNode<E> current = head.next;
-			for (int i = 0; i < index; i++) {
-				previous = current;
-				current = current.next;
-			}
-			previous.next = current.next;
-			size--;
-			return current.data;
-		}
-	}
-	
-	public boolean remove(E e) {
+	public boolean erase(E e) {
 		SinglyNode<E> previous = head;
 		SinglyNode<E> current = head.next;
 		while (current != null) {

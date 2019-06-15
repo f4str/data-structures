@@ -42,6 +42,26 @@ void arraylist_set(arraylist* list, int index, void* e) {
 	list->data[index] = e;
 }
 
+bool arraylist_contains(const arraylist* list, void* e) {
+	int i;
+	for (i = 0; i < list->size; ++i) {
+		if (list->data[i] == e) {
+			return true;
+		}
+	}
+	return false;
+}
+
+int arraylist_index(const arraylist* list, void* e) {
+	int i;
+	for (i = 0; i < list->size; ++i) {
+		if (list->data[i] == e) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 void arraylist_add(arraylist* list, void* e) {
 	if (list->size == list->capacity) {
 		list->data = realloc(list->data, list->capacity * 2);
@@ -66,28 +86,7 @@ void arraylist_insert(arraylist* list, int index, void* e) {
 	list->data[index] = e;
 }
 
-
-bool arraylist_contains(const arraylist* list, void* e) {
-	int i;
-	for (i = 0; i < list->size; ++i) {
-		if (list->data[i] == e) {
-			return true;
-		}
-	}
-	return false;
-}
-
-int arraylist_index(const arraylist* list, void* e) {
-	int i;
-	for (i = 0; i < list->size; ++i) {
-		if (list->data[i] == e) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-void* arraylist_erase(arraylist* list, int index) {
+void* arraylist_remove(arraylist* list, int index) {
 	void* temp = list->data[index];
 	int i;
 	--(list->size);
@@ -97,10 +96,10 @@ void* arraylist_erase(arraylist* list, int index) {
 	return temp;
 }
 
-bool arraylist_remove(arraylist* list, void* e) {
+bool arraylist_erase(arraylist* list, void* e) {
 	int i = arraylist_index(list, e);
 	if (i >= 0) {
-		arraylist_erase(list, i);
+		arraylist_remove(list, i);
 		return true;
 	}
 	return false;

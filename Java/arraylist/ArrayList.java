@@ -21,12 +21,12 @@ public class ArrayList<E> {
 		return size;
 	}
 	
-	public boolean isEmpty() {
-		return size == 0;
-	}
-	
 	public int capacity() {
 		return data.length;
+	}
+	
+	public boolean isEmpty() {
+		return size == 0;
 	}
 	
 	public E get(int index) {
@@ -72,16 +72,6 @@ public class ArrayList<E> {
 		return false;
 	}
 	
-	public E erase(int index) {
-		E elem = data[index];
-		size--;
-		for (int i = index; i < size; i++) {
-			data[i] = data[i + 1];
-		}
-		data[size] = null;
-		return elem;
-	}
-	
 	public int indexOf(E e) {
 		for (int i = 0; i < size; i++) {
 			if (e.equals(data[i])) {
@@ -91,7 +81,17 @@ public class ArrayList<E> {
 		return -1;
 	}
 	
-	public boolean remove(E e) {
+	public E remove(int index) {
+		E elem = data[index];
+		size--;
+		for (int i = index; i < size; i++) {
+			data[i] = data[i + 1];
+		}
+		data[size] = null;
+		return elem;
+	}
+	
+	public boolean erase(E e) {
 		int index = indexOf(e);
 		if (index >= 0) {
 			remove(index);
