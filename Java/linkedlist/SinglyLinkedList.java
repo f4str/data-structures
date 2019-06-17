@@ -225,16 +225,10 @@ public class SinglyLinkedList<E> {
 	}
 	
 	public boolean erase(E e) {
-		SinglyNode<E> previous = head;
-		SinglyNode<E> current = head.next;
-		while (current != null) {
-			if (current.data.equals(e)) {
-				previous.next = current.next;
-				size--;
-				return true;
-			}
-			previous = current;
-			current = current.next;
+		int index = indexOf(e);
+		if (index >= 0) {
+			remove(index);
+			return true;
 		}
 		return false;
 	}

@@ -10,11 +10,10 @@ typedef struct doublynode {
 } doublynode;
 
 doublynode* doublynode_new(void* data);
-void doublynode_free(doublynode* node);
 
 typedef struct doublylinkedlist {
-	struct node* head;
-	struct node* tail;
+	struct doublynode* head;
+	struct doublynode* tail;
 	int size;
 } doublylinkedlist;
 

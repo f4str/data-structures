@@ -254,28 +254,11 @@ namespace LinkedList
 		
 		public bool Erase(T e) 
 		{
-			DoublyNode<T> current = _head;
-			while (current != null) 
+			int index = IndexOf(e);
+			if (index >= 0) 
 			{
-				if (current.Data.Equals(e)) 
-				{
-					if (current == _head) 
-					{
-						removeFirst();
-					}
-					else if (current == _tail) 
-					{
-						removeLast();
-					}
-					else 
-					{
-						current.Previous.Next = current.Next;
-						current.Next.Previous = current.Previous;
-						Count--;
-					}
-					return true;
-				}
-				current = current.Next;
+				Remove(index);
+				return true;
 			}
 			return false;
 		}

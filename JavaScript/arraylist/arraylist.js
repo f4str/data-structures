@@ -83,18 +83,18 @@ class ArrayList {
 	}
 	
 	remove(index) {
-		let temp = self.data[index]
-		self._size--
-		for (let i = index; i < self._length; i++) {
-			self._data[i] = self._data[i + 1];
+		let temp = this.data[index]
+		this._length--
+		for (let i = index; i < this._length; i++) {
+			this._data[i] = this._data[i + 1];
 		}
 		return temp
 	}
 	
 	erase(e) {
-		let i = self.indexOf(e)
+		let i = this.indexOf(e)
 		if (i >= 0) {
-			self.remove(i);
+			this.remove(i);
 			return true;
 		}
 		return false;

@@ -43,7 +43,7 @@ class SinglyLinkedList:
 			return self.last
 		else:
 			current = self._head
-			for _ in range (index):
+			for _ in range(index):
 				current = current.next
 			return current.data
 	
@@ -65,18 +65,16 @@ class SinglyLinkedList:
 		if index == 0:
 			data = self.first
 			self.first = e
-			return data
 		elif index == self._length - 1:
 			data = self.last
 			self.last = e
-			return data
 		else:
 			current = self._head
-			for _ in range (index):
+			for _ in range(index):
 				current = current.next
 			data = current.data
 			current.data = e
-			return data
+		return data
 	
 	def add_first(self, e):
 		if self._length == 0:
@@ -91,6 +89,7 @@ class SinglyLinkedList:
 	def add_last(self, e):
 		if self._length == 0:
 			self._tail = SinglyNode(e)
+			self._head = self._tail
 		else:
 			temp = SinglyNode(e)
 			self._tail.next = temp
@@ -152,7 +151,7 @@ class SinglyLinkedList:
 	
 	def contains(self, e):
 		current = self._head
-		while current is not None:
+		while current:
 			if current.data == e:
 				return True
 			current = current.next
@@ -161,7 +160,7 @@ class SinglyLinkedList:
 	def index(self, e):
 		current = self._head
 		i = 0
-		while current is not None:
+		while current:
 			if current.data == e:
 				return i
 			current = current.next
@@ -169,15 +168,10 @@ class SinglyLinkedList:
 		return -1
 	
 	def erase(self, e):
-		previous = self._head
-		current = self._head.next
-		while current is not None:
-			if current.data == e:
-				previous.next = current.next
-				self._length -= 1
-				return True
-			previous = current
-			current = current.next
+		i = self.index(e)
+		if i >= 0:
+			self.remove(i)
+			return True
 		return False
 	
 	def clear(self):

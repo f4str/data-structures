@@ -214,16 +214,10 @@ class SinglyLinkedList {
 	}
 	
 	erase(e) {
-		let previous = this._head;
-		let current = this._head.next;
-		while (current != null) {
-			if (current.data == e) {
-				previous.next = current.next;
-				this._length--;
-				return true;
-			}
-			previous = current;
-			current = current.next;
+		let i = this.indexOf(e)
+		if (i >= 0) {
+			this.remove(i);
+			return true;
 		}
 		return false;
 	}

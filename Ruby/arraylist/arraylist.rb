@@ -11,6 +11,14 @@ class ArrayList
 		end
 	end
 	
+	def [](index)
+		@data[index]
+	end
+	
+	def []=(index, e)
+		@data[index] = e
+	end
+	
 	def length
 		@size
 	end
@@ -24,14 +32,6 @@ class ArrayList
 	end
 	
 	def set=(index, e)
-		@data[index] = e
-	end
-	
-	def [](index)
-		@data[index]
-	end
-	
-	def []=(index, e)
 		@data[index] = e
 	end
 	

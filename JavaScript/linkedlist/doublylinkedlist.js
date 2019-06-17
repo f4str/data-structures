@@ -212,23 +212,10 @@ class DoublyLinkedList {
 	}
 	
 	erase(e) {
-		let current = this._head;
-		while (current != null) {
-			if (current.data == e) {
-				if (current == this._head) {
-					this.removeFirst();
-				}
-				else if (current == this._tail) {
-					this.removeLast();
-				}
-				else {
-					current.previous.next = current.next;
-					current.next.previous = current.previous;
-					this._length--;
-				}
-				return true;
-			}
-			current = current.next;
+		let i = this.indexOf(e)
+		if (i >= 0) {
+			this.remove(i);
+			return true;
 		}
 		return false;
 	}

@@ -254,18 +254,11 @@ namespace LinkedList
 		
 		public bool Erase(T e) 
 		{
-			SinglyNode<T> previous = _head;
-			SinglyNode<T> current = _head.Next;
-			while (current != null) 
+			int index = IndexOf(e);
+			if (index >= 0) 
 			{
-				if (current.Data.Equals(e)) 
-				{
-					previous.Next = current.Next;
-					Count--;
-					return true;
-				}
-				previous = current;
-				current = current.Next;
+				Remove(index);
+				return true;
 			}
 			return false;
 		}

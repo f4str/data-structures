@@ -224,23 +224,10 @@ public class DoublyLinkedList<E> {
 	}
 	
 	public boolean erase(E e) {
-		DoublyNode<E> current = head;
-		while (current != null) {
-			if (current.data.equals(e)) {
-				if (current == head) {
-					removeFirst();
-				}
-				else if (current == tail) {
-					removeLast();
-				}
-				else {
-					current.previous.next = current.next;
-					current.next.previous = current.previous;
-					size--;
-				}
-				return true;
-			}
-			current = current.next;
+		int index = indexOf(e);
+		if (index >= 0) {
+			remove(index);
+			return true;
 		}
 		return false;
 	}

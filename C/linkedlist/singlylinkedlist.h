@@ -9,11 +9,10 @@ typedef struct singlynode {
 } singlynode;
 
 singlynode* singlynode_new(void* data);
-void singlynode_free(singlynode* node);
 
 typedef struct singlylinkedlist {
-	struct node* head;
-	struct node* tail;
+	struct singlynode* head;
+	struct singlynode* tail;
 	int size;
 } singlylinkedlist;
 
