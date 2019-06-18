@@ -174,10 +174,10 @@ void* doublylinkedlist_removefirst(doublylinkedlist* list) {
 		doublylinkedlist_clear(list);
 	}
 	else {
-		current = list->head;
-		list->head = current->next;
+		current = list->head->next;
+		free(list->head);
+		list->head = current;
 		list->head->previous = NULL;
-		free(current);
 		--(list->size);
 	}
 	return data;
@@ -190,10 +190,10 @@ void* doublylinkedlist_removelast(doublylinkedlist* list) {
 		doublylinkedlist_clear(list);
 	}
 	else {
-		current = list->tail;
-		list->tail = current->previous;
+		current = list->tail->previous;
+		free(list->tail);
+		list->tail = current;
 		list->tail->next = NULL;
-		free(current);
 		--(list->size);
 	}
 	return data;
@@ -250,6 +250,19 @@ bool doublylinkedlist_erase(doublylinkedlist* list, void* e) {
 }
 
 void doublylinkedlist_clear(doublylinkedlist* list) {
+	if (list->size == 0) {
+		return;
+	}
+	
+	doublynode* current = list->head;
+	doublynode* temp = current->next;
+	while (temp != NULL) {
+		free(current);
+		current = temp;
+		temp = temp->next;
+	}
+	free(current);
+	
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;

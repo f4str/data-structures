@@ -25,7 +25,7 @@ class ArrayList {
 		int index(T& e);
 		void add(T& e);
 		void insert(int index, T& e);
-		T& remove(int index);
+		void remove(int index);
 		bool erase(T& e);
 		void clear();
 };

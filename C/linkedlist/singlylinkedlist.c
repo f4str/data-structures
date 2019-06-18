@@ -172,9 +172,9 @@ void* singlylinkedlist_removefirst(singlylinkedlist* list) {
 		singlylinkedlist_clear(list);
 	}
 	else {
-		current = list->head;
-		list->head = current->next;
-		free(current);
+		current = list->head->next;
+		free(list->head);
+		list->head = current;
 		--(list->size);
 	}
 	return data;
@@ -191,7 +191,7 @@ void* singlylinkedlist_removelast(singlylinkedlist* list) {
 		while (current->next != list->tail) {
 			current = current->next;
 		}
-		free(current->next);
+		free(list->tail);
 		current->next = NULL;
 		list->tail = current;
 		--(list->size);
@@ -252,6 +252,19 @@ bool singlylinkedlist_erase(singlylinkedlist* list, void* e) {
 }
 
 void singlylinkedlist_clear(singlylinkedlist* list) {
+	if (list->size == 0) {
+		return;
+	}
+	
+	singlynode* current = list->head;
+	singlynode* temp = current->next;
+	while (temp != NULL) {
+		free(current);
+		current = temp;
+		temp = temp->next;
+	}
+	free(current);
+	
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;

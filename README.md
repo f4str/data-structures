@@ -15,4 +15,5 @@ Implementations of various data structures in several different languages.
 ## List of Data Structures Implemented
 
 * ArrayList
+* LinkedList
 

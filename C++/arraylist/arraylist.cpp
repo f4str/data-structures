@@ -107,13 +107,11 @@ void ArrayList<T>::insert(int index, T& e) {
 }
 
 template <typename T>
-T& ArrayList<T>::remove(int index) {
-	T& temp =data_[index];
+void ArrayList<T>::remove(int index) {
 	--size_;
 	for (int i = index; i < size_; ++i) {
 		data_[i] = data_[i + 1];
 	}
-	return temp;
 }
 
 template <typename T>
