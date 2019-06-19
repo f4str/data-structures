@@ -19,7 +19,6 @@ class SinglyLinkedList {
 	public:
 		SinglyLinkedList() : head_(nullptr), tail_(nullptr), size_(0) {};
 		SinglyLinkedList(T arr[], int length);
-		SinglyLinkedList(const SinglyLinkedList& list);
 		~SinglyLinkedList();
 		T& operator[](int index);
 		

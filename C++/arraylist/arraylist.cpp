@@ -8,16 +8,6 @@ ArrayList<T>::ArrayList(T arr[], int length) : ArrayList() {
 }
 
 template <typename T>
-ArrayList<T>::ArrayList(const ArrayList<T>& list) {
-	size_ = list.size;
-	capacity_ = list.capacity;
-	data_ = new T[capacity_];
-	for (int i = 0; i < size_; ++i) {
-		data_[i] = list.data[i];
-	}
-}
-
-template <typename T>
 ArrayList<T>::~ArrayList() {
 	delete[] data_;
 }

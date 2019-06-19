@@ -12,7 +12,6 @@ class ArrayList {
 		
 		ArrayList() : data_(new T[INITAL_CAPACITY]), size_(0), capacity_(INITAL_CAPACITY) {};
 		ArrayList(T arr[], int length);
-		ArrayList(const ArrayList& list);
 		~ArrayList();
 		T& operator[](int index);
 		

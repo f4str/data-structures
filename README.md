@@ -16,4 +16,5 @@ Implementations of various data structures in several different languages.
 
 * ArrayList
 * LinkedList
+* Stack
 

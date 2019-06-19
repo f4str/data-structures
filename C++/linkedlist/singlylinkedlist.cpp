@@ -8,14 +8,6 @@ SinglyLinkedList<T>::SinglyLinkedList(T arr[], int length) : SinglyLinkedList() 
 }
 
 template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList& list) : SinglyLinkedList() {
-	SinglyNode<T>* current = list.head_;
-	while (current != nullptr) {
-		addLast(current->data);
-	}
-}
-
-template <typename T>
 SinglyLinkedList<T>::~SinglyLinkedList() {
 	if (size_ == 0) {
 		return;
