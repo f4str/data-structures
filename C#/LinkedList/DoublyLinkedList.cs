@@ -113,12 +113,12 @@ namespace LinkedList
 		{
 			if (Count == 0) 
 			{
-				_head = new DoublyNode(e);
+				_head = new DoublyNode<T>(e);
 				_tail = _head;
 			}
 			else 
 			{
-				DoublyNode<T> temp = new DoublyNode(e);
+				DoublyNode<T> temp = new DoublyNode<T>(e);
 				temp.Next = _head;
 				_head.Previous = temp;
 				_head = temp;
@@ -130,12 +130,12 @@ namespace LinkedList
 		{
 			if (Count == 0) 
 			{
-				_tail = new DoublyNode(e);
+				_tail = new DoublyNode<T>(e);
 				_head = _tail;
 			}
 			else 
 			{
-				DoublyNode<T> temp = new DoublyNode(e);
+				DoublyNode<T> temp = new DoublyNode<T>(e);
 				_tail.Next = temp;
 				temp.Previous = _tail;
 				_tail = temp;
@@ -160,7 +160,7 @@ namespace LinkedList
 				{
 					current = current.Next;
 				}
-				DoublyNode<T> temp = new DoublyNode(e);
+				DoublyNode<T> temp = new DoublyNode<T>(e);
 				current.Previous.Next = temp;
 				temp.Previous = current.Previous;
 				temp.Next = current;

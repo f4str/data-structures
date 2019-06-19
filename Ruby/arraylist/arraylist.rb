@@ -35,7 +35,7 @@ class ArrayList
 		@data[index] = e
 	end
 	
-	def contains(e)
+	def include?(e)
 		@data.each { |v| return true if v == e }
 		false
 	

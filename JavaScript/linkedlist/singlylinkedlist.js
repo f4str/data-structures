@@ -9,7 +9,7 @@ class SinglyLinkedList {
 	constructor(elems = null) {
 		this._head = null;
 		this._tail = null;
-		this._length = null;
+		this._length = 0;
 		if (elems) {
 			for (let e in elems) {
 				this.addLast(e);

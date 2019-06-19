@@ -108,11 +108,11 @@ public class SinglyLinkedList<E> {
 	
 	public void addFirst(E e) {
 		if (size == 0) {
-			head = new SinglyNode(e);
+			head = new SinglyNode<E>(e);
 			tail = head;
 		}
 		else {
-			SinglyNode<E> temp = new SinglyNode(e);
+			SinglyNode<E> temp = new SinglyNode<E>(e);
 			temp.next = head;
 			head = temp;
 		}
@@ -121,11 +121,11 @@ public class SinglyLinkedList<E> {
 	
 	public void addLast(E e) {
 		if (size == 0) {
-			tail = new SinglyNode(e);
+			tail = new SinglyNode<E>(e);
 			head = tail;
 		}
 		else {
-			SinglyNode<E> temp = new SinglyNode(e);
+			SinglyNode<E> temp = new SinglyNode<E>(e);
 			tail.next = temp;
 			tail = temp;
 		}
@@ -146,7 +146,7 @@ public class SinglyLinkedList<E> {
 				previous = current;
 				current = current.next;
 			}
-			SinglyNode<E> temp = new SinglyNode(e);
+			SinglyNode<E> temp = new SinglyNode<E>(e);
 			previous.next = temp;
 			temp.next = current;
 			size++;

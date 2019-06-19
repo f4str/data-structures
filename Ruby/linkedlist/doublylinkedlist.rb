@@ -14,7 +14,7 @@ class DoublyLinkedList
 		@head = nil
 		@tail = nil
 		@size = 0
-		unless elems.nil?
+		if elems
 			elems.each { |e| add_last(e) }
 		end
 	end
@@ -171,7 +171,7 @@ class DoublyLinkedList
 		end
 	end
 	
-	def contains(e)
+	def include?(e)
 		current = @head
 		while current
 			return true if current.data == e

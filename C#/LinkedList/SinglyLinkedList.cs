@@ -109,12 +109,12 @@ namespace LinkedList
 		{
 			if (Count == 0) 
 			{
-				_head = new SinglyNode(e);
+				_head = new SinglyNode<T>(e);
 				_tail = _head;
 			}
 			else 
 			{
-				SinglyNode<T> temp = new SinglyNode(e);
+				SinglyNode<T> temp = new SinglyNode<T>(e);
 				temp.Next = _head;
 				_head = temp;
 			}
@@ -125,12 +125,12 @@ namespace LinkedList
 		{
 			if (Count == 0) 
 			{
-				_tail = new SinglyNode(e);
+				_tail = new SinglyNode<T>(e);
 				_head = _tail;
 			}
 			else 
 			{
-				SinglyNode<T> temp = new SinglyNode(e);
+				SinglyNode<T> temp = new SinglyNode<T>(e);
 				_tail.Next = temp;
 				_tail = temp;
 			}
@@ -156,7 +156,7 @@ namespace LinkedList
 					previous = current;
 					current = current.Next;
 				}
-				SinglyNode<T> temp = new SinglyNode(e);
+				SinglyNode<T> temp = new SinglyNode<T>(e);
 				previous.Next = temp;
 				temp.Next = current;
 				Count++;

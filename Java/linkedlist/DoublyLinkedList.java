@@ -110,11 +110,11 @@ public class DoublyLinkedList<E> {
 	
 	public void addFirst(E e) {
 		if (size == 0) {
-			head = new DoublyNode(e);
+			head = new DoublyNode<E>(e);
 			tail = head;
 		}
 		else {
-			DoublyNode<E> temp = new DoublyNode(e);
+			DoublyNode<E> temp = new DoublyNode<E>(e);
 			temp.next = head;
 			head.previous = temp;
 			head = temp;
@@ -124,11 +124,11 @@ public class DoublyLinkedList<E> {
 	
 	public void addLast(E e) {
 		if (size == 0) {
-			tail = new DoublyNode(e);
+			tail = new DoublyNode<E>(e);
 			head = tail;
 		}
 		else {
-			DoublyNode<E> temp = new DoublyNode(e);
+			DoublyNode<E> temp = new DoublyNode<E>(e);
 			tail.next = temp;
 			temp.previous = tail;
 			tail = temp;
@@ -148,7 +148,7 @@ public class DoublyLinkedList<E> {
 			for (int i = 0; i <= index; i++) {
 				current = current.next;
 			}
-			DoublyNode<E> temp = new DoublyNode(e);
+			DoublyNode<E> temp = new DoublyNode<E>(e);
 			current.previous.next = temp;
 			temp.previous = current.previous;
 			temp.next = current;
