@@ -1,4 +1,4 @@
-class StackNode
+class QueueNode
 	attr_accessor :data, :next
 	
 	def initialize(data)
@@ -7,14 +7,15 @@ class StackNode
 	end
 end
 
-class Stack
+class Queue
 	attr_reader :size
 	
-	def initialize(elems = nil)
-		@top = nil
+	def initalize(elems = nil)
+		@front = nil
+		@back = nil
 		@size = 0
 		if elems
-			elems.each { |e| push(e) }
+			elems.each { |e| enqueue(e) }
 		end
 	end
 	
@@ -26,32 +27,35 @@ class Stack
 		@size == 0
 	end
 	
-	def push(e)
+	def enqueue(e)
 		if @size == 0
-			@top = StackNode.new(e)
+			@back = QueueNode.new(e)
+			@front = @back
 		else
-			temp = SinglyNode.new(e)
-			temp.next = @top
-			@top = temp
+			temp = QueueNode.new(e)
+			@back.next = temp
+			@back = temp
 		end
 		@size += 1
 	end
 	
 	def peek
-		@top&.data
+		@front&.data
 	end
 	
-	def pop
+	def dequeue
 		data = peek()
-		if data
-			@top = @top.next
+		if @front == @back
+			clear()
+		else
+			@front = @front.next
 			@size -= 1
 		end
 		data
 	end
 	
 	def include?(e)
-		current = @top
+		current = @front
 		while current
 			return true if current.data = e
 			current = current.next
@@ -60,7 +64,8 @@ class Stack
 	end
 	
 	def clear
-		@top = nil
+		@front = nil
+		@back = nil
 		@size = 0
 	end
 end

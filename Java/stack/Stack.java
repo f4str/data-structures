@@ -4,11 +4,11 @@ public class Stack<E> {
 	private class StackNode<E> {
 		private E data;
 		private StackNode<E> next;
-	}
 	
-	private StackNode(E e) {
-		data = e;
-		next = null;
+		private StackNode(E e) {
+			data = e;
+			next = null;
+		}
 	}
 	
 	private StackNode<E> top;

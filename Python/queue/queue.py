@@ -1,16 +1,17 @@
-class StackNode:
+class QueueNode:
 	def __init__(self, data):
 		self.data = data
 		self.next = None
 
 
-class Stack:
+class Queue:
 	def __init__(self, elems = None):
-		self._top = None
+		self._front = None
+		self._back = None
 		self._length = 0
 		if elems:
 			for e in elems:
-				self.push(e)
+				self.enqueue(e)
 	
 	def __len__(self):
 		return self._length
@@ -21,28 +22,30 @@ class Stack:
 	def empty(self):
 		return self._length == 0
 	
-	def push(self, e):
+	def enqueue(self, e):
 		if self._length == 0:
-			self._top = StackNode(e)
+			self._back = QueueNode(e)
+			self._front = self._back
 		else:
-			temp = StackNode(e)
-			temp.next = self._top
-			self._top = temp
+			temp = QueueNode(e)
+			self._back.next = temp
+			self._back = temp
 		self._length += 1
 	
 	def peek(self):
-		return getattr(self._top, 'data', None)
+		return getattr(self._front, 'data', None)
 	
-	def pop(self):
-		if self._length == 0:
-			return None
-		data = self._top.data
-		self._top = self._top.next
-		self._length -= 1
+	def dequeue(self):
+		data = self.peek()
+		if self._front == self._back:
+			self.clear()
+		else:
+			self._front = self._front.next
+			self._length -= 1
 		return data
 	
 	def contains(self, e):
-		current = self._top
+		current = self._front
 		while current:
 			if current.data == e:
 				return True
@@ -50,6 +53,6 @@ class Stack:
 		return False
 	
 	def clear(self):
-		self._top = None
+		self._front = None
+		self._back = None
 		self._length = 0
-
