@@ -46,7 +46,7 @@ int doublylinkedlist_size(const doublylinkedlist* list) {
 	return list->size;
 }
 
-bool doublylinkedlist_empty(const doublylinkedlist* list) {
+int doublylinkedlist_empty(const doublylinkedlist* list) {
 	return list->size == 0;
 }
 
@@ -218,15 +218,15 @@ void* doublylinkedlist_remove(doublylinkedlist* list, int index) {
 	return data;
 }
 
-bool doublylinkedlist_contains(const doublylinkedlist* list, void* e) {
+int doublylinkedlist_contains(const doublylinkedlist* list, void* e) {
 	doublynode* current = list->head;
 	while (current != NULL) {
 		if (current->data == e) {
-			return true;
+			return 1;
 		}
 		current = current->next;
 	}
-	return false;
+	return 0;
 }
 
 int doublylinkedlist_index(const doublylinkedlist* list, void* e) {
@@ -240,13 +240,13 @@ int doublylinkedlist_index(const doublylinkedlist* list, void* e) {
 	return -1;
 }
 
-bool doublylinkedlist_erase(doublylinkedlist* list, void* e) {
+int doublylinkedlist_erase(doublylinkedlist* list, void* e) {
 	int index = doublylinkedlist_index(list, e);
 	if (index >= 0) {
 		doublylinkedlist_remove(list, index);
-		return true;
+		return 1;
 	}
-	return false;
+	return 0;
 }
 
 void doublylinkedlist_clear(doublylinkedlist* list) {

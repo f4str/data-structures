@@ -30,7 +30,7 @@ int arraylist_capacity(const arraylist* list) {
 	return list->capacity;
 }
 
-bool arraylist_empty(const arraylist* list) {
+int arraylist_empty(const arraylist* list) {
 	return list->size == 0;
 }
 
@@ -42,14 +42,14 @@ void arraylist_set(arraylist* list, int index, void* e) {
 	list->data[index] = e;
 }
 
-bool arraylist_contains(const arraylist* list, void* e) {
+int arraylist_contains(const arraylist* list, void* e) {
 	int i;
 	for (i = 0; i < list->size; ++i) {
 		if (list->data[i] == e) {
-			return true;
+			return 1;
 		}
 	}
-	return false;
+	return 0;
 }
 
 int arraylist_index(const arraylist* list, void* e) {
@@ -96,13 +96,13 @@ void* arraylist_remove(arraylist* list, int index) {
 	return temp;
 }
 
-bool arraylist_erase(arraylist* list, void* e) {
+int arraylist_erase(arraylist* list, void* e) {
 	int i = arraylist_index(list, e);
 	if (i >= 0) {
 		arraylist_remove(list, i);
-		return true;
+		return 1;
 	}
-	return false;
+	return 0;
 }
 
 void arraylist_clear(arraylist* list) {

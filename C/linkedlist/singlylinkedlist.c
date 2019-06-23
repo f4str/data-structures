@@ -45,7 +45,7 @@ int singlylinkedlist_size(const singlylinkedlist* list) {
 	return list->size;
 }
 
-bool singlylinkedlist_empty(const singlylinkedlist* list) {
+int singlylinkedlist_empty(const singlylinkedlist* list) {
 	return list->size == 0;
 }
 
@@ -220,15 +220,15 @@ void* singlylinkedlist_remove(singlylinkedlist* list, int index) {
 	return data;
 }
 
-bool singlylinkedlist_contains(const singlylinkedlist* list, void* e) {
+int singlylinkedlist_contains(const singlylinkedlist* list, void* e) {
 	singlynode* current = list->head;
 	while (current != NULL) {
 		if (current->data == e) {
-			return true;
+			return 1;
 		}
 		current = current->next;
 	}
-	return false;
+	return 0;
 }
 
 int singlylinkedlist_index(const singlylinkedlist* list, void* e) {
@@ -242,13 +242,13 @@ int singlylinkedlist_index(const singlylinkedlist* list, void* e) {
 	return -1;
 }
 
-bool singlylinkedlist_erase(singlylinkedlist* list, void* e) {
+int singlylinkedlist_erase(singlylinkedlist* list, void* e) {
 	int index = singlylinkedlist_index(list, e);
 	if (index >= 0) {
 		singlylinkedlist_remove(list, index);
-		return true;
+		return 1;
 	}
-	return false;
+	return 0;
 }
 
 void singlylinkedlist_clear(singlylinkedlist* list) {

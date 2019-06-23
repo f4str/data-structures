@@ -43,7 +43,7 @@ int stack_size(stack* s) {
 	return s->size;
 }
 
-bool stack_empty(stack* s) {
+int stack_empty(stack* s) {
 	return s->size == 0;
 }
 
@@ -77,15 +77,15 @@ void* stack_pop(stack* s) {
 	return data;
 }
 
-bool stack_contains(stack* s, void* e) {
+int stack_contains(stack* s, void* e) {
 	stacknode* current = s->top;
 	while (current != NULL) {
 		if (current->data == e) {
-			return true;
+			return 1;
 		}
 		current = current->next;
 	}
-	return false;
+	return 0;
 }
 
 void stack_clear(stack* s) {
