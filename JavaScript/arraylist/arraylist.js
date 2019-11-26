@@ -6,7 +6,7 @@ class ArrayList {
 		this._length = 0;
 		this._capacity = INITIAL_CAPACITY;
 		if (elems) {
-			for (let e in elems) {
+			for (const e of elems) {
 				this.add(e);
 			}
 		}
@@ -35,7 +35,7 @@ class ArrayList {
 	}
 	
 	contains(e) {
-		for (let v in this._data) {
+		for (const v in this._data) {
 			if (v == e) {
 				return true;
 			}
@@ -88,7 +88,7 @@ class ArrayList {
 		for (let i = index; i < this._length; i++) {
 			this._data[i] = this._data[i + 1];
 		}
-		return temp
+		return temp;
 	}
 	
 	erase(e) {

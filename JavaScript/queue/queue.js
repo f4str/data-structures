@@ -11,7 +11,7 @@ class Queue {
 		this._back = null;
 		this._length = 0;
 		if (elems) {
-			for (let e in elems) {
+			for (const e of elems) {
 				this.enqueue(e);
 			}
 		}

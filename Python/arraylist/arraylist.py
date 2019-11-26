@@ -3,7 +3,7 @@ class ArrayList:
 	
 	def __init__(self, elems = None):
 		self._capacity = INITIAL_CAPACITY
-		self._data = [None] * self._capacity
+		self._data = [None] * INITIAL_CAPACITY
 		self._length = 0
 		if elems:
 			for e in elems:

@@ -11,7 +11,7 @@ class SinglyLinkedList {
 		this._tail = null;
 		this._length = 0;
 		if (elems) {
-			for (let e in elems) {
+			for (const e of elems) {
 				this.addLast(e);
 			}
 		}
