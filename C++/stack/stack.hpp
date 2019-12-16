@@ -1,5 +1,4 @@
-#ifndef STACK_HPP
-#define STACK_HPP
+#pragma once
 
 template <typename T>
 struct StackNode {
@@ -28,5 +27,3 @@ class Stack {
 		bool contains(T& e);
 		void clear();
 };
-
-#endif

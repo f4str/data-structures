@@ -1,5 +1,4 @@
-#ifndef QUEUE_HPP
-#define QUEUE_HPP
+#pragma once
 
 template <typename T>
 struct QueueNode {
@@ -29,5 +28,3 @@ class Queue {
 		bool contains(T& e);
 		void clear();
 };
-
-#endif

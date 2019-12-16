@@ -1,5 +1,4 @@
-#ifndef SINGLYLINKEDLIST_HPP
-#define SINGLYLINKEDLIST_HPP
+#pragma once
 
 template <typename T>
 struct SinglyNode {
@@ -41,5 +40,3 @@ class SinglyLinkedList {
 		bool erase(T& e);
 		void clear();
 };
-
-#endif

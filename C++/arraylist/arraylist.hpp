@@ -1,5 +1,4 @@
-#ifndef ARRAYLIST_HPP
-#define ARRAYLIST_HPP
+#pragma once
 
 template <typename T>
 class ArrayList {
@@ -28,5 +27,3 @@ class ArrayList {
 		bool erase(T& e);
 		void clear();
 };
-
-#endif

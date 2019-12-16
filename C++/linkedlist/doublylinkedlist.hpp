@@ -1,5 +1,4 @@
-#ifndef DOUBLYLINKEDLIST_HPP
-#define DOUBLYLINKEDLIST_HPP
+#pragma once
 
 template <typename T>
 struct DoublyNode {
@@ -42,5 +41,3 @@ class DoublyLinkedList {
 		bool erase(T& e);
 		void clear();
 };
-
-#endif
