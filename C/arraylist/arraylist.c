@@ -3,8 +3,7 @@
 #include "arraylist.h"
 
 arraylist* arraylist_new() {
-	arraylist* list = NULL;
-	list = malloc(sizeof(arraylist));
+	arraylist* list = malloc(sizeof(arraylist));
 	list->size = 0;
 	list->capacity = INITIAL_CAPACITY;
 	list->data = malloc(INITIAL_CAPACITY * sizeof(void*));
@@ -69,7 +68,7 @@ void arraylist_add(arraylist* list, void* e) {
 	}
 	
 	list->data[list->size] = e;
-	++(list->size);
+	++list->size;
 }
 
 void arraylist_insert(arraylist* list, int index, void* e) {
@@ -78,7 +77,8 @@ void arraylist_insert(arraylist* list, int index, void* e) {
 		list->capacity *= 2;
 	}
 	
-	++(list->size);
+	++list->size;
+	
 	int i;
 	for (i = list->size; i >= index; --i) {
 		list->data[i] = list->data[i - 1];
@@ -88,8 +88,9 @@ void arraylist_insert(arraylist* list, int index, void* e) {
 
 void* arraylist_remove(arraylist* list, int index) {
 	void* temp = list->data[index];
+	--list->size;
+	
 	int i;
-	--(list->size);
 	for (i = index; i < list->size; ++i) {
 		list->data[i] = list->data[i + 1];
 	}

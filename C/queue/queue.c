@@ -3,16 +3,14 @@
 #include "queue.h"
 
 queuenode* queuenode_new(void* data) {
-	queuenode* node = NULL;
-	node = malloc(sizeof(queuenode));
+	queuenode* node = malloc(sizeof(queuenode));
 	node->data = data;
 	node->next = NULL;
 	return node;
 }
 
 queue* queue_new(void) {
-	queue* q = NULL;
-	q = malloc(sizeof(queue));
+	queue* q = malloc(sizeof(queue));
 	q->front = NULL;
 	q->back = NULL;
 	q->size = 0;
@@ -30,6 +28,7 @@ void queue_free(queue* q) {
 		free(q);
 		return;
 	}
+	
 	queuenode* current = q->front;
 	queuenode* temp = current->next;
 	while (temp != NULL) {
@@ -59,7 +58,7 @@ void queue_enqueue(queue* q, void* e) {
 		q->back->next = temp;
 		q->back = temp;
 	}
-	++(q->size);
+	++q->size;
 }
 
 void* queue_peek(queue* q) {
@@ -79,7 +78,7 @@ void* queue_dequeue(queue* q) {
 		current = q->front->next;
 		free(q->front);
 		q->front = current;
-		--(q->size);
+		--q->size;
 	}
 	return data;
 }
@@ -99,6 +98,7 @@ void queue_clear(queue* q) {
 	if (q->size == 0) {
 		return;
 	}
+	
 	queuenode* current = q->front;
 	queuenode* temp = current->next;
 	while (temp != NULL) {

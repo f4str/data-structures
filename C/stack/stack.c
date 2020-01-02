@@ -3,16 +3,14 @@
 #include "stack.h"
 
 stacknode* stacknode_new(void* data) {
-	stacknode* node = NULL;
-	node = malloc(sizeof(stacknode));
+	stacknode* node = malloc(sizeof(stacknode));
 	node->data = data;
 	node->next = NULL;
 	return node;
 }
 
 stack* stack_new(void) {
-	stack* s = NULL;
-	s = malloc(sizeof(stack));
+	stack* s = malloc(sizeof(stack));
 	s->top = NULL;
 	s->size = 0;
 	return s;
@@ -28,6 +26,7 @@ void stack_free(stack* s) {
 		free(s);
 		return;
 	}
+	
 	stacknode* current = s->top;
 	stacknode* temp = current->next;
 	while (temp != NULL) {
@@ -56,7 +55,7 @@ void stack_push(stack* s, void* e) {
 		temp->next = s->top;
 		s->top = temp;
 	}
-	++(s->size);
+	++s->size;
 }
 
 void* stack_peek(stack* s) {
@@ -92,6 +91,7 @@ void stack_clear(stack* s) {
 	if (s->size == 0) {
 		return;
 	}
+	
 	stacknode* current = s->top;
 	stacknode* temp = current->next;
 	while (temp != NULL) {

@@ -3,16 +3,14 @@
 #include "singlylinkedlist.h"
 
 singlynode* singlynode_new(void* data) {
-	singlynode* node = NULL;
-	node = malloc(sizeof(singlynode));
+	singlynode* node = malloc(sizeof(singlynode));
 	node->data = data;
 	node->next = NULL;
 	return node;
 }
 
 singlylinkedlist* singlylinkedlist_new() {
-	singlylinkedlist* list = NULL;
-	list = malloc(sizeof(singlylinkedlist));
+	singlylinkedlist* list = malloc(sizeof(singlylinkedlist));
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;
@@ -30,6 +28,7 @@ void singlylinkedlist_free(singlylinkedlist* list) {
 		free(list);
 		return;
 	}
+	
 	singlynode* current = list->head;
 	singlynode* temp = current->next;
 	while (temp != NULL) {
@@ -70,6 +69,7 @@ void* singlylinkedlist_get(const singlylinkedlist* list, int index) {
 	else if (index == list->size - 1) {
 		return singlylinkedlist_getlast(list);
 	}
+	
 	singlynode* current = list->head;
 	int i;
 	for (i = 0; i < index; ++i) {
@@ -107,6 +107,7 @@ void* singlylinkedlist_set(singlylinkedlist* list, int index, void* e) {
 	else if (index == list->size - 1) {
 		return singlylinkedlist_setlast(list, e);
 	}
+	
 	singlynode* current = list->head;
 	int i;
 	for (i = 0; i < index; ++i) {
@@ -127,7 +128,7 @@ void singlylinkedlist_addfirst(singlylinkedlist* list, void* e) {
 		temp->next = list->head;
 		list->head = temp;
 	}
-	++(list->size);
+	++list->size;
 }
 
 void singlylinkedlist_addlast(singlylinkedlist* list, void* e) {
@@ -140,7 +141,7 @@ void singlylinkedlist_addlast(singlylinkedlist* list, void* e) {
 		list->tail->next = temp;
 		list->tail = temp;
 	}
-	++(list->size);
+	++list->size;
 }
 
 void singlylinkedlist_add(singlylinkedlist* list, int index, void* e) {
@@ -152,6 +153,7 @@ void singlylinkedlist_add(singlylinkedlist* list, int index, void* e) {
 		singlylinkedlist_addlast(list, e);
 		return;
 	}
+	
 	singlynode* previous = list->head;
 	singlynode* current = previous->next;
 	int i;
@@ -162,7 +164,7 @@ void singlylinkedlist_add(singlylinkedlist* list, int index, void* e) {
 	singlynode* temp = singlynode_new(e);
 	previous->next = temp;
 	temp->next = current;
-	++(list->size);
+	++list->size;
 }
 
 void* singlylinkedlist_removefirst(singlylinkedlist* list) {
@@ -175,7 +177,7 @@ void* singlylinkedlist_removefirst(singlylinkedlist* list) {
 		current = list->head->next;
 		free(list->head);
 		list->head = current;
-		--(list->size);
+		--list->size;
 	}
 	return data;
 }
@@ -194,7 +196,7 @@ void* singlylinkedlist_removelast(singlylinkedlist* list) {
 		free(list->tail);
 		current->next = NULL;
 		list->tail = current;
-		--(list->size);
+		--list->size;
 	}
 	return data;
 }
@@ -206,6 +208,7 @@ void* singlylinkedlist_remove(singlylinkedlist* list, int index) {
 	else if (index == list->size - 1) {
 		return singlylinkedlist_removelast(list);
 	}
+	
 	singlynode* previous = list->head;
 	singlynode* current = previous->next;
 	int i;
@@ -216,7 +219,7 @@ void* singlylinkedlist_remove(singlylinkedlist* list, int index) {
 	previous->next = current->next;
 	void* data = current->data;
 	free(current);
-	--(list->size);
+	--list->size;
 	return data;
 }
 

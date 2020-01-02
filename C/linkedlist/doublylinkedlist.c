@@ -3,8 +3,7 @@
 #include "doublylinkedlist.h"
 
 doublynode* doublynode_new(void* data) {
-	doublynode* node = NULL;
-	node = malloc(sizeof(doublynode));
+	doublynode* node = malloc(sizeof(doublynode));
 	node->data = data;
 	node->next = NULL;
 	node->previous = NULL;
@@ -12,8 +11,7 @@ doublynode* doublynode_new(void* data) {
 }
 
 doublylinkedlist* doublylinkedlist_new() {
-	doublylinkedlist* list = NULL;
-	list = malloc(sizeof(doublylinkedlist));
+	doublylinkedlist* list = malloc(sizeof(doublylinkedlist));
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;
@@ -31,6 +29,7 @@ void doublylinkedlist_free(doublylinkedlist* list) {
 		free(list);
 		return;
 	}
+	
 	doublynode* current = list->head;
 	doublynode* temp = current->next;
 	while (temp != NULL) {
@@ -71,6 +70,7 @@ void* doublylinkedlist_get(const doublylinkedlist* list, int index) {
 	else if (index == list->size - 1) {
 		return doublylinkedlist_getlast(list);
 	}
+	
 	doublynode* current = list->head;
 	int i;
 	for (i = 0; i < index; ++i) {
@@ -108,6 +108,7 @@ void* doublylinkedlist_set(doublylinkedlist* list, int index, void* e) {
 	else if (index == list->size - 1) {
 		return doublylinkedlist_setlast(list, e);
 	}
+	
 	doublynode* current = list->head;
 	int i;
 	for (i = 0; i < index; ++i) {
@@ -129,7 +130,7 @@ void doublylinkedlist_addfirst(doublylinkedlist* list, void* e) {
 		temp->previous = NULL;
 		list->head = temp;
 	}
-	++(list->size);
+	++list->size;
 }
 
 void doublylinkedlist_addlast(doublylinkedlist* list, void* e) {
@@ -143,7 +144,7 @@ void doublylinkedlist_addlast(doublylinkedlist* list, void* e) {
 		temp->previous = list->tail;
 		list->tail = temp;
 	}
-	++(list->size);
+	++list->size;
 }
 
 void doublylinkedlist_add(doublylinkedlist* list, int index, void* e) {
@@ -155,6 +156,7 @@ void doublylinkedlist_add(doublylinkedlist* list, int index, void* e) {
 		doublylinkedlist_addlast(list, e);
 		return;
 	}
+	
 	doublynode* current = list->head;
 	int i;
 	for (i = 0; i <= index; ++i) {
@@ -164,7 +166,7 @@ void doublylinkedlist_add(doublylinkedlist* list, int index, void* e) {
 	current->previous->next = temp;
 	temp->previous = current->previous;
 	temp->next = current;
-	++(list->size);
+	++list->size;
 }
 
 void* doublylinkedlist_removefirst(doublylinkedlist* list) {
@@ -178,7 +180,7 @@ void* doublylinkedlist_removefirst(doublylinkedlist* list) {
 		free(list->head);
 		list->head = current;
 		list->head->previous = NULL;
-		--(list->size);
+		--list->size;
 	}
 	return data;
 }
@@ -194,7 +196,7 @@ void* doublylinkedlist_removelast(doublylinkedlist* list) {
 		free(list->tail);
 		list->tail = current;
 		list->tail->next = NULL;
-		--(list->size);
+		--list->size;
 	}
 	return data;
 }
@@ -206,6 +208,7 @@ void* doublylinkedlist_remove(doublylinkedlist* list, int index) {
 	else if (index == list->size - 1) {
 		return doublylinkedlist_removelast(list);
 	}
+	
 	doublynode* current = list->head;
 	int i;
 	for (i = 0; i < index; ++i) {
@@ -214,7 +217,7 @@ void* doublylinkedlist_remove(doublylinkedlist* list, int index) {
 	current->previous->next = current->next;
 	void* data = current->data;
 	free(current);
-	--(list->size);
+	--list->size;
 	return data;
 }
 
