@@ -4,8 +4,9 @@ template <typename T>
 struct DoublyNode {
 	T data;
 	DoublyNode<T>* next;
+	DoublyNode<T>* previous;
 	
-	DoublyNode(T& data) : data(data), next(nullptr) {};
+	DoublyNode(T& data) : data(data), next(nullptr), previous(nullptr) {};
 };
 
 template <typename T>

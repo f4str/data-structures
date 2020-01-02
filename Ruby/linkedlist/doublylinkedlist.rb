@@ -4,6 +4,7 @@ class DoublyNode
    def initialize(data)
 		@data = data
 		@next = nil
+		@previous = nil
    end
 end
 

@@ -2,7 +2,7 @@
 
 Implementations of various data structures in several different languages.
 
-## List of Languages Used
+## Languages Available
 
 * C
 * C++
@@ -12,10 +12,10 @@ Implementations of various data structures in several different languages.
 * Python
 * Ruby
 
-## List of Data Structures Implemented
+## Structures Implemented
 
 * ArrayList
 * LinkedList
 * Stack
 * Queue
-
+* Deque

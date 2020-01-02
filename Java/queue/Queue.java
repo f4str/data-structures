@@ -11,8 +11,8 @@ public class Queue<E> {
 		}
 	}
 	
-	private QueueNode front;
-	private QueueNode back;
+	private QueueNode<E> front;
+	private QueueNode<E> back;
 	private int size;
 	
 	public Queue() {
